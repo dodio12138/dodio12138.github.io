@@ -11,6 +11,7 @@ window {
     background: var(--ButtonFace);
     border-color: var(--ButtonLight) black black var(--ButtonLight);
     text-decoration: none;
+    transition: none; /* 确保拖拽时没有动画延迟 */
 }
 
 windowTitlebar {

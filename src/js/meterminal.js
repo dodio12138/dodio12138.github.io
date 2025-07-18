@@ -1,5 +1,5 @@
 function meterminalwin() {
-    document.getElementById('windows').appendChild(createWindow('meterminalwin',600, 500,'MeTerminal','../../res/img//console_prompt-0.png'))
+    document.getElementById('windows').appendChild(createWindow('meterminalwin',600, 500,'MeTerminal','../../res/img/console_prompt-0.png'))
     const meterminalwin = document.getElementById('meterminalwin');
     const contect = meterminalwin.getElementsByClassName('wincontent')[0];
 
