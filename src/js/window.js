@@ -1,34 +1,132 @@
 function closewindow(button) {
     var window = button.parentNode.parentNode;
+    removeTaskbarButton(window.id);
     window.remove();
 }
 
 function minwindow(button) {
     var window = button.parentNode.parentNode;
-    if (window.getElementsByClassName('wincontent')[0].style.display != 'none') {
-        window.getElementsByClassName('wincontent')[0].style.display = 'none';
-    } else {
-        window.getElementsByClassName('wincontent')[0].style.display = 'flex';
+    toggleTaskbarWindow(window.id);
+}
+
+function removeTaskbarButton(windowId) {
+    var taskButton = document.getElementById('task-' + windowId);
+    if (taskButton) {
+        taskButton.remove();
     }
 }
 
-// let isMax = false;
+function updateTaskbarButton(windowId, isActive) {
+    var taskButton = document.getElementById('task-' + windowId);
+    if (!taskButton) return;
 
-//TODO
+    if (isActive) {
+        taskButton.classList.add('active');
+    } else {
+        taskButton.classList.remove('active');
+    }
+}
+
+function toggleTaskbarWindow(windowId) {
+    var windowElement = document.getElementById(windowId);
+    if (!windowElement) return;
+
+    if (windowElement.style.display === 'none') {
+        windowElement.style.display = 'flex';
+        focusTaskbarWindow(windowId);
+    } else {
+        windowElement.style.display = 'none';
+        updateTaskbarButton(windowId, false);
+    }
+}
+
+function focusTaskbarWindow(windowId) {
+    var windowElement = document.getElementById(windowId);
+    if (!windowElement) return;
+
+    windowElement.style.display = 'flex';
+
+    var windows = Array.from(document.querySelectorAll('window'));
+    var maxZ = Math.max(0, ...windows.map(function (win) {
+        return parseInt(win.style.zIndex) || 0;
+    }));
+    windowElement.style.zIndex = maxZ + 1;
+
+    document.querySelectorAll('.task-button').forEach(function (button) {
+        button.classList.remove('active');
+    });
+    updateTaskbarButton(windowId, true);
+}
+
+function createTaskbarButton(windowId, title, icon) {
+    var tasksBar = document.querySelector('.tasks-bar');
+    if (!tasksBar) return;
+
+    removeTaskbarButton(windowId);
+
+    var taskButton = document.createElement('button');
+    var taskIcon = document.createElement('img');
+    var taskTitle = document.createElement('span');
+
+    taskButton.id = 'task-' + windowId;
+    taskButton.className = 'task-button active';
+    taskButton.title = title;
+    taskButton.setAttribute('type', 'button');
+
+    taskIcon.src = icon;
+    taskIcon.alt = '';
+    taskTitle.textContent = title;
+
+    taskButton.appendChild(taskIcon);
+    taskButton.appendChild(taskTitle);
+    taskButton.addEventListener('click', function () {
+        toggleTaskbarWindow(windowId);
+    });
+
+    document.querySelectorAll('.task-button').forEach(function (button) {
+        button.classList.remove('active');
+    });
+    tasksBar.appendChild(taskButton);
+}
+
 function maxwindow(button) {
-    // var window_ = button.parentNode.parentNode;
-    // if(!isMax){
-    //     console.log(window.innerWidth/parseInt(window_.getElementsByClassName('wincontent')[0].style.width,10));
-    //     window_.style.transformX = `scale(${window.innerWidth/parseInt(window_.getElementsByClassName('wincontent')[0].style.width,10)})`;
-    //     window_.style.transformY = `scale(${window.innerHeight/parseInt(window_.getElementsByClassName('wincontent')[0].style.height,10)})`;
-    //     isMax = true;
-    // }else{
-    //     window_.style.transform = "scale(1)";
-    //     isMax = false;
-    // }
+    var windowElement = button.parentNode.parentNode;
+    var titlebar = windowElement.querySelector('windowTitlebar');
+    var content = windowElement.getElementsByClassName('wincontent')[0];
+
+    if (windowElement.dataset.maximized === 'true') {
+        windowElement.style.top = windowElement.dataset.restoreTop;
+        windowElement.style.left = windowElement.dataset.restoreLeft;
+        content.style.width = windowElement.dataset.restoreContentWidth;
+        content.style.height = windowElement.dataset.restoreContentHeight;
+        titlebar.style.width = windowElement.dataset.restoreTitlebarWidth;
+        windowElement.dataset.maximized = 'false';
+        return;
+    }
+
+    windowElement.dataset.restoreTop = windowElement.style.top;
+    windowElement.dataset.restoreLeft = windowElement.style.left;
+    windowElement.dataset.restoreContentWidth = content.style.width;
+    windowElement.dataset.restoreContentHeight = content.style.height;
+    windowElement.dataset.restoreTitlebarWidth = titlebar.style.width;
+
+    var taskbarHeight = document.getElementById('BottomBar')?.offsetHeight || 32;
+    windowElement.style.top = '0px';
+    windowElement.style.left = '0px';
+    titlebar.style.width = 'calc(100vw - 10px)';
+    content.style.width = 'calc(100vw - 12px)';
+    content.style.height = `calc(100vh - ${taskbarHeight + 32}px)`;
+    windowElement.dataset.maximized = 'true';
+    focusTaskbarWindow(windowElement.id);
 }
 
 function createWindow(id, width, height, title, icon) {
+    var oldWindow = document.getElementById(id);
+    if (oldWindow) {
+        removeTaskbarButton(id);
+        oldWindow.remove();
+    }
+
     const windowDiv = document.createElement('window');
     windowDiv.id = id;
     const windowTitlebar = document.createElement('windowTitlebar');
@@ -87,8 +185,12 @@ function createWindow(id, width, height, title, icon) {
     maxicon.style.backgroundImage = `url("../../res/icon/maximize.svg")`;
     closeicon.style.backgroundImage = `url("../../res/icon/close.svg")`;
 
-    Title.innerHTML = title;
+    Title.textContent = title;
 
+    createTaskbarButton(id, title, icon);
+    windowDiv.addEventListener('mousedown', function () {
+        focusTaskbarWindow(id);
+    });
     makeDraggable(windowTitlebar, windowDiv);
 
     return windowDiv;

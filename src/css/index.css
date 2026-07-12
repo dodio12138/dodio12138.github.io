@@ -158,6 +158,62 @@ a {
     flex: 1;
     height: 100%;
     min-width: 0;
+    gap: 3px;
+    padding: 2px 4px;
+    box-sizing: border-box;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+}
+
+.tasks-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.task-button {
+    min-width: 72px;
+    max-width: 170px;
+    flex: 1 0 90px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 6px;
+    overflow: hidden;
+    font-family: W95FA;
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--ButtonText);
+    background: var(--ButtonFace);
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--ButtonLight) var(--ButtonShadow) var(--ButtonShadow) var(--ButtonLight);
+    cursor: url('../../../../res/img/Cursor_15.cur'), default;
+}
+
+.task-button.active {
+    border-color: var(--ButtonShadow) var(--ButtonLight) var(--ButtonLight) var(--ButtonShadow);
+    box-shadow: inset 1px 1px black, inset -1px -1px white;
+    background:
+        radial-gradient(#9f9f9f 1px, transparent 1px) 0 0 / 4px 4px,
+        var(--ButtonFace);
+}
+
+.task-button:active {
+    border-color: var(--ButtonShadow) var(--ButtonLight) var(--ButtonLight) var(--ButtonShadow);
+}
+
+.task-button img {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 auto;
+}
+
+.task-button span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .tray {
