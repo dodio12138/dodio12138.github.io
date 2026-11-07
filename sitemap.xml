@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?> 
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
   <loc>http://dodio12138.github.io/src/page/levy_stuff.html</loc>
 </url>
@@ -53,5 +53,35 @@
 </url>
 <url>
   <loc>https://dodio12138.github.io/fun-pages/page/stuff-list.html</loc>
+</url>
+<url>
+  <loc>https://dodio12138.github.io/campaignandbattle/</loc>
+</url>
+<url>
+  <loc>https://dodio12138.github.io/sanguo-cli/</loc>
+</url>
+<url>
+  <loc>https://dodio12138.github.io/HBYY/</loc>
+</url>
+<url>
+  <loc>https://dodio12138.github.io/</loc>
+</url>
+<url>
+  <loc>https://dodio12138.github.io/haidilao-waimai-heatmap/</loc>
+</url>
+<url>
+  <loc>https://dodio12138.github.io/Descent-Chart-Generator/</loc>
+</url>
+<url>
+  <loc>https://dodio12138.github.io/Fleet-Battle-Simulator/</loc>
+</url>
+<url>
+  <loc>https://dodio12138.github.io/blog/</loc>
+</url>
+<url>
+  <loc>https://dodio12138.github.io/MeTerminal/</loc>
+</url>
+<url>
+  <loc>https://dodio12138.github.io/air</loc>
 </url>
 </urlset>

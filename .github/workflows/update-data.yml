@@ -1,0 +1,75 @@
+# 每天自动更新桌面应用的数据（GitHub 仓库、itch.io 游戏、Bilibili 视频、Instagram 照片）和 sitemap.xml。
+# 有变化才提交；也可以在仓库的 Actions → "Update profile data" → "Run workflow" 手动运行。
+#
+# 可选的 Secrets（Settings → Secrets and variables → Actions），设置方法见 scripts/INSTAGRAM_SETUP.md：
+#   INSTAGRAM_TOKEN  Instagram 长期访问令牌；不设置则跳过 Instagram
+#   GH_PAT           有本仓库 "Secrets: Read and write" 权限的细粒度令牌，用来把续期后的 Instagram 令牌写回 Secrets
+
+name: Update profile data
+
+on:
+    schedule:
+        - cron: '17 3 * * *'   # 每天 UTC 03:17（北京时间 11:17）
+    workflow_dispatch:
+
+permissions:
+    contents: write
+    pages: write
+
+concurrency:
+    group: update-data
+    cancel-in-progress: false
+
+jobs:
+    update:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+
+            - name: Fetch data
+              run: node scripts/update-data.mjs
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
+                  INSTAGRAM_TOKEN_FILE: ${{ runner.temp }}/instagram-token
+
+            # Instagram 令牌 60 天过期：脚本每次都会续期，这里把新令牌存回 Secrets
+            - name: Save refreshed Instagram token
+              env:
+                  GH_TOKEN: ${{ secrets.GH_PAT }}
+                  TOKEN_FILE: ${{ runner.temp }}/instagram-token
+              run: |
+                  if [ ! -s "$TOKEN_FILE" ]; then exit 0; fi
+                  if [ -z "$GH_TOKEN" ]; then
+                      echo "::notice::Instagram token was refreshed but GH_PAT is not set, so it was not saved. Replace INSTAGRAM_TOKEN manually before it expires (60 days), or add GH_PAT."
+                  else
+                      gh secret set INSTAGRAM_TOKEN --repo "${{ github.repository }}" < "$TOKEN_FILE"
+                      echo "Instagram token saved."
+                  fi
+                  rm -f "$TOKEN_FILE"
+
+            - name: Commit changes
+              id: commit
+              run: |
+                  git add data sitemap.xml res/img/instagram
+                  if git diff --cached --quiet; then
+                      echo "No changes."
+                      echo "changed=false" >> "$GITHUB_OUTPUT"
+                      exit 0
+                  fi
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git commit -m "更新主页数据（GitHub / itch.io / Bilibili / Instagram）"
+                  git push
+                  echo "changed=true" >> "$GITHUB_OUTPUT"
+
+            # 机器人推送的提交不一定会触发 Pages 重新部署，这里主动请求一次
+            - name: Rebuild GitHub Pages
+              if: steps.commit.outputs.changed == 'true'
+              run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "::warning::Could not request a Pages build; the site will update on the next deploy."
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

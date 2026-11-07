@@ -1,37 +1,30 @@
+/* levy_stuff.html 样式 */
+
 @font-face {
     font-family: EffortsPro;
-    src: url('../../res/fonts/EffortsPro.woff');
+    src: url('../../res/fonts/EffortsPro.woff') format('woff');
 }
 
 #mainCav {
-    color:black;
+    color: black;
+    font-family: EffortsPro, sans-serif;
+    user-select: none;
 }
 
 #head {
-    font-family: 'EffortsPro';
-    user-select: none;
+    margin-bottom: 1em;
     font-size: 30px;
 }
 
-a {
-    user-select: none;
-    font-family: 'EffortsPro';
-}
-
-#Item {
-    user-select: none;
-    font-family: 'EffortsPro';
-    font-size: 25px;
-}
-
-ul
-{
+ul {
     list-style-type: none;
 }
 
-#Intro {
-    text-decoration: none;
-    color: black;
-    font-family: 'EffortsPro';
+.directory ul {
+    padding-left: 40px;
+}
+
+.intro,
+.item {
     font-size: 25px;
 }

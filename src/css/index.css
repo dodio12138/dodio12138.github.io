@@ -1,166 +1,160 @@
-:root {
-	--ButtonLight: rgb(223, 223, 223);
-    --ButtonShadow: rgb(128, 128, 128);
-    --ButtonText: rgb(0, 0, 0);
-	--ButtonFace: rgb(192, 192, 192);
-    --ButtonHilight: rgb(255, 255, 255);
-	--ActiveTitle: rgb(0, 0, 128);
-	--GradientActiveTitle: rgb(16, 132, 208);
-}
+/* 桌面外壳：桌面图标 + 任务栏。变量见 base.css */
 
-@font-face {
-    font-family: W95FA;
-    src: url('../../../../res/fonts/W95FA.otf');
-}
-
-* {
-	/*box-sizing:border-box;*/
-	padding:0px;
-	margin:0px;
-	image-rendering: pixelated;
-}
-
-.dragging {
-	cursor: url('../../../../res/img/handgrab2.cur'), default;
-}
-
+/* ---------- 桌面 ---------- */
 
 #DeskBackground {
-    width:100%;
-	height:100vh;
-	background-color:#008080;
-	background-size:100% 100%,auto;
-	font-family:'W95FA';
-	font-size:15px;
-	color:white;
-	overflow:hidden;
-	display: grid;
-	grid-template-rows: 80px 80px 80px 80px 80px 80px 80px;
-	grid-template-columns: 100px;
+    width: 100%;
+    height: calc(100vh - var(--taskbar-height));
+    display: flex;
+    justify-content: space-between;
+    padding-top: 4px;
+    overflow: hidden;
+    background: var(--Desktop);
+    font-size: 15px;
+    line-height: 18px;
+    color: var(--DesktopText);
 }
 
-body
-{
-	width:100%;
-	height:100%;
-	display:grid;
-	align-items:center;
-	overflow:hidden;
-	cursor: url('../../../../res/img/arrow.cur'), default;
+/* 两组图标：左侧系统 / 站内，右侧各平台应用；空间不够时自动换列 */
+.desktop-icons {
+    height: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(auto-fill, 80px);
+    grid-auto-columns: 100px;
+    align-content: start;
 }
 
-html
-{
-	width:100%;
-	height:100%;
-	background-size:100% 100%,auto;
-	font-family:'W95FA';
-	font-size:10px;
-	color:#000;
-	overflow:hidden;
-	line-height:20px;
+/* 右侧组从右往左排列新列 */
+.desktop-icons-right {
+    direction: rtl;
 }
 
-b {
-    font-weight: bold;
-	font-family: W95FA;
-	text-decoration: none;
+.desktop-icons-right > .app-box {
+    direction: ltr;
 }
 
-a {
-	cursor: url('../../../../res/img/Cursor_15.cur'), default;
-}
-.app-box
-{
-	padding:10px;
-	display:grid;
-	position:relative;
-	text-align:initial;
-	align-items: center;
-	overflow: hidden;
-	text-align:center;
+.app-box {
+    display: grid;
+    place-items: center;
+    padding: 6px 4px;
+    overflow: hidden;
+    text-align: center;
 }
 
-.app
-{
-	-webkit-touch-callout:none;
-	-webkit-user-select:none;
-	-khtml-user-select:none;
-	-moz-user-select:none; 
-	-ms-user-select:none;
-	text-decoration: none;
-	user-select:none;
-	color: aliceblue;
-	/*text-shadow: 0px 0px 6px #000000, 0.5px 0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px -0.5px 0 #000;*/
+.app-box[hidden] {
+    display: none;
 }
 
-.icon
-{
-	width:35%;
+.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    color: inherit;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    cursor: var(--cursor-pointer);
 }
 
-.inset-shallow {
-    border-style: solid;
-    border-width: 1px;
-    border-color: rgb(128, 128, 128) rgb(255, 255, 255) rgb(255, 255, 255) rgb(128, 128, 128);
-    border-color: var(--ButtonShadow) var(--ButtonHilight) var(--ButtonHilight) var(--ButtonShadow);
-    background-color: rgb(192, 192, 192);
-    background-color: var(--ButtonFace);
-    color: rgb(0, 0, 0);
-    color: var(--ButtonText);
+.app .icon {
+    width: 32px;
+    height: 32px;
 }
+
+.app-title {
+    padding: 0 2px;
+}
+
+.app:focus,
+.app:focus-visible {
+    outline: none;
+}
+
+/* 选中：图标染蓝，标题高亮；有焦点的图标标题加虚线框 */
+.app.selected .icon {
+    filter: brightness(0.6) sepia(1) hue-rotate(190deg) saturate(4);
+}
+
+.app.selected .app-title {
+    background: var(--Highlight);
+    color: var(--HighlightText);
+}
+
+.app:focus .app-title {
+    outline: 1px dotted var(--DesktopText);
+    outline-offset: -1px;
+}
+
+/* 框选的虚线框 */
+.desktop-marquee {
+    position: fixed;
+    z-index: var(--z-taskbar);
+    border: 1px dotted var(--DesktopText);
+    pointer-events: none;
+}
+
+/* 桌面右键 Refresh 时短暂闪一下 */
+#DeskBackground.refreshing .app-box {
+    visibility: hidden;
+}
+
+/* ---------- 任务栏 ---------- */
 
 #BottomBar {
-	width: 100%;
-    height: 28px;
     position: fixed;
-    bottom: 0;
     left: 0;
     right: 0;
+    bottom: 0;
+    z-index: var(--z-taskbar);
+    height: var(--taskbar-height);
     display: flex;
-	outline: 1px solid var(--ButtonLight);
-    border-top: 1px solid var(--ButtonHilight);
+    align-items: center;
+    gap: 2px;
+    padding: 2px;
     background: var(--ButtonFace);
-	text-decoration: none;
+    box-shadow: inset 0 1px var(--ButtonLight), inset 0 2px var(--ButtonHilight);
 }
 
 .start-button {
-	flex-shrink: 0;
-    padding: 2px 4px;
-	border-width: 2px 2px;
-	border-color: var(--ButtonLight) var(--ButtonShadow) var(--ButtonShadow) var(--ButtonLight);
-	margin: 2px;
-	background-color: var(--ButtonFace);
-
-	line-height: 14px;
-    overflow: hidden;
+    flex-shrink: 0;
+    height: 22px;
     display: flex;
-    flex-direction: row;
     align-items: center;
-	text-decoration: none;
+    gap: 3px;
+    padding: 2px 5px 2px 4px;
+    box-shadow: var(--bevel-raised);
+    font-weight: bold;
 }
 
 .start-button img {
-	object-fit: contain;
-	width: 100%;
-	height: 100%;
-	margin-right: 3px;
+    width: 16px;
+    height: 16px;
 }
 
-.BottomBar-divider {
-	border-left: 1px solid var(--ButtonShadow);
-    border-right: 1px solid var(--ButtonHilight);
-	margin: 2px 0px 2px 0px;
+.start-button.pressed {
+    box-shadow: var(--bevel-pressed);
+    padding: 3px 4px 1px 5px;
+}
+
+.taskbar-divider {
+    flex-shrink: 0;
+    align-self: stretch;
+    width: 2px;
+    margin: 1px 1px;
+    box-shadow: var(--etch-v);
 }
 
 .tasks-bar {
-	display: flex;
     flex: 1;
-    height: 100%;
     min-width: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
     gap: 3px;
-    padding: 2px 4px;
-    box-sizing: border-box;
     overflow-x: auto;
     overflow-y: hidden;
     scrollbar-width: none;
@@ -171,36 +165,26 @@ a {
 }
 
 .task-button {
+    flex: 1 0 90px;
     min-width: 72px;
     max-width: 170px;
-    flex: 1 0 90px;
     height: 22px;
     display: flex;
     align-items: center;
     gap: 4px;
     padding: 2px 6px;
     overflow: hidden;
-    font-family: W95FA;
-    font-size: 14px;
-    line-height: 16px;
-    color: var(--ButtonText);
-    background: var(--ButtonFace);
-    border-width: 2px;
-    border-style: solid;
-    border-color: var(--ButtonLight) var(--ButtonShadow) var(--ButtonShadow) var(--ButtonLight);
-    cursor: url('../../../../res/img/Cursor_15.cur'), default;
-}
-
-.task-button.active {
-    border-color: var(--ButtonShadow) var(--ButtonLight) var(--ButtonLight) var(--ButtonShadow);
-    box-shadow: inset 1px 1px black, inset -1px -1px white;
-    background:
-        radial-gradient(#9f9f9f 1px, transparent 1px) 0 0 / 4px 4px,
-        var(--ButtonFace);
+    box-shadow: var(--bevel-raised);
 }
 
 .task-button:active {
-    border-color: var(--ButtonShadow) var(--ButtonLight) var(--ButtonLight) var(--ButtonShadow);
+    box-shadow: var(--bevel-pressed);
+}
+
+.task-button.active {
+    box-shadow: var(--bevel-pressed);
+    background: var(--dither), var(--ButtonFace);
+    font-weight: bold;
 }
 
 .task-button img {
@@ -217,30 +201,15 @@ a {
 }
 
 .tray {
-	display: flex;
-    flex-direction: row;
-    line-height: 22px;
-    box-sizing: border-box;
-    vertical-align: middle;
-	margin: 2px;
+    flex-shrink: 0;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    box-shadow: var(--bevel-shallow);
 }
 
 #taskbar-time {
-	width: 60px;
+    min-width: 52px;
     text-align: center;
-}
-
-.windows {
-	border-style:outset;
-    border-width:1.5px;
-}
-
-.app-title {
-	transition-delay: outline 0.1s;
-}
-
-.app-title:hover {
-	outline: 1px dotted #f18484;
-    outline-offset: -1px;
-	transition-delay: outline 0.1s;
 }

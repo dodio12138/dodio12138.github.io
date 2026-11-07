@@ -1,0 +1,621 @@
+/* 应用共用样式（My Projects、GitHub、itch.io、Bilibili、Instagram）：列表视图、文件夹 Web 视图、卡片、播放器、状态栏。变量见 base.css */
+
+.app-wincontent {
+    flex-direction: column;
+    gap: 2px;
+    padding: 0;
+    background: var(--ButtonFace);
+    box-shadow: none;
+}
+
+.app-wincontent > .menubar {
+    box-shadow: var(--etch-h);
+    padding-bottom: 2px;
+    height: 22px;
+}
+
+/* ---------- 顶部信息条 ---------- */
+
+.app-header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+}
+
+.app-header-avatar {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    image-rendering: auto;
+    box-shadow: 0 0 0 1px var(--ButtonDkShadow);
+}
+
+.app-header-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.app-header-text strong {
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.app-header-text span {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--GrayText);
+}
+
+/* ---------- 白底凹陷的内容区 ---------- */
+
+.app-pane {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    margin: 0 2px;
+    background: var(--Window);
+    box-shadow: var(--bevel-sunken);
+    padding: 2px;
+}
+
+.app-pane.white {
+    background: var(--ButtonHilight);
+}
+
+.app-message {
+    padding: 16px;
+    color: var(--GrayText);
+}
+
+/* ---------- 列表视图（详细信息） ---------- */
+
+.listview {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    user-select: none;
+}
+
+.listview th {
+    position: sticky;
+    top: -2px;
+    z-index: 1;
+    padding: 0;
+    font-weight: normal;
+    text-align: left;
+}
+
+.listview th button {
+    width: 100%;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 6px;
+    box-shadow: var(--bevel-raised);
+    text-align: left;
+    white-space: nowrap;
+    cursor: var(--cursor-default);
+}
+
+.listview th button:active {
+    box-shadow: var(--bevel-pressed);
+}
+
+/* 排序箭头 */
+.listview th button[data-sort]::after {
+    content: '';
+    margin-left: auto;
+    border-style: solid;
+    border-color: var(--GrayText) transparent;
+}
+
+.listview th button[data-sort="asc"]::after { border-width: 0 4px 5px 4px; }
+.listview th button[data-sort="desc"]::after { border-width: 5px 4px 0 4px; }
+
+.listview td {
+    height: 20px;
+    padding: 0 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.listview td.num {
+    text-align: right;
+}
+
+.listview td.muted {
+    color: var(--GrayText);
+}
+
+.listview .cell-name {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    overflow: hidden;
+}
+
+.listview .cell-name img {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.listview .cell-name span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.listview tr.selected td,
+.listview tr.selected td.muted {
+    background: var(--Highlight);
+    color: var(--HighlightText);
+}
+
+/* ---------- 大图标视图 ---------- */
+
+.iconview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+    grid-auto-rows: max-content;
+    gap: 10px 4px;
+    padding: 6px;
+    user-select: none;
+}
+
+.iconview-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+    cursor: var(--cursor-default);
+}
+
+.iconview-item img {
+    width: 32px;
+    height: 32px;
+}
+
+.iconview-item span {
+    max-width: 100%;
+    padding: 0 2px;
+    overflow-wrap: anywhere;
+}
+
+.iconview-item.selected img {
+    filter: brightness(0.6) sepia(1) hue-rotate(190deg) saturate(4);
+}
+
+.iconview-item.selected span {
+    background: var(--Highlight);
+    color: var(--HighlightText);
+}
+
+/* ---------- 卡片（itch.io 游戏、Bilibili 视频） ---------- */
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    padding: 8px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 4px;
+    background: var(--ButtonFace);
+    box-shadow: var(--bevel-raised);
+    user-select: none;
+    cursor: var(--cursor-pointer);
+}
+
+.card.selected {
+    outline: 1px dotted var(--ButtonDkShadow);
+    outline-offset: -3px;
+}
+
+.card-thumb {
+    position: relative;
+    aspect-ratio: 315 / 250;
+    overflow: hidden;
+    background: var(--ButtonShadow);
+    box-shadow: var(--bevel-sunken);
+}
+
+.card-thumb.wide {
+    aspect-ratio: 16 / 10;
+}
+
+.card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: auto;
+    display: block;
+}
+
+.card-badge {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    padding: 0 4px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.card-title {
+    padding: 0 2px;
+    font-weight: bold;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.card-text {
+    padding: 0 2px;
+    color: #404040;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 0 2px 2px;
+    margin-top: auto;
+    color: var(--GrayText);
+    font-size: 13px;
+}
+
+.card-tag {
+    padding: 0 4px;
+    background: var(--ButtonHilight);
+    box-shadow: var(--bevel-shallow);
+    color: var(--ButtonText);
+}
+
+/* ---------- 播放器（Bilibili） ---------- */
+
+.player {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 4px;
+}
+
+.player[hidden] {
+    display: none;
+}
+
+.player-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.player-title {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.player-screen {
+    flex: 1;
+    min-height: 0;
+    padding: 2px;
+    background: #000;
+    box-shadow: var(--bevel-sunken);
+}
+
+.player-screen iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+/* ---------- 状态栏 ---------- */
+
+.statusbar {
+    display: flex;
+    gap: 2px;
+    flex-shrink: 0;
+    height: 22px;
+    padding: 2px 2px 0;
+}
+
+.statusbar > span:not(.size-grip) {
+    display: block;
+    padding: 0 6px;
+    line-height: 20px;
+    box-shadow: var(--bevel-shallow);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.statusbar > .status-main {
+    flex: 1;
+    min-width: 0;
+}
+
+/* ---------- 文件夹 Web 视图（My Projects） ---------- */
+
+.folder-body {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    gap: 2px;
+    margin: 0 2px;
+}
+
+.folder-body > .app-pane {
+    margin: 0;
+}
+
+.folder-side {
+    width: 34%;
+    max-width: 220px;
+    flex-shrink: 0;
+    overflow-y: auto;
+    padding: 12px 10px;
+    background: var(--ButtonHilight);
+    box-shadow: var(--bevel-sunken);
+}
+
+.folder-side-icon {
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
+.folder-side-title {
+    margin-top: 6px;
+    font-size: 20px;
+    line-height: 24px;
+    word-break: break-word;
+}
+
+/* Win98 Web 视图标题下的彩色渐变线 */
+.folder-side-rule {
+    height: 2px;
+    margin: 6px 0 10px;
+    background: linear-gradient(to right, var(--ActiveTitle), var(--GradientActiveTitle) 45%, #f0c040 75%, transparent);
+}
+
+.folder-side-body p {
+    margin-bottom: 8px;
+}
+
+.folder-side-name {
+    display: block;
+    word-break: break-word;
+}
+
+.folder-side-type,
+.folder-side-hint {
+    color: var(--GrayText);
+}
+
+@media (max-width: 520px) {
+    .folder-side {
+        display: none;
+    }
+}
+
+/* ---------- 日期/时间 属性 ---------- */
+
+.datetime-page {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 10px;
+}
+
+.datetime-page[hidden],
+.datetime-zone[hidden] {
+    display: none;
+}
+
+.calendar-bar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 6px;
+}
+
+.calendar-month {
+    flex: 1;
+    text-align: center;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    padding: 2px;
+    background: var(--ButtonHilight);
+    box-shadow: var(--bevel-sunken);
+    text-align: center;
+    user-select: none;
+}
+
+.calendar-head {
+    background: var(--ButtonShadow);
+    color: var(--ButtonHilight);
+    line-height: 16px;
+}
+
+.calendar-day {
+    line-height: 17px;
+}
+
+.calendar-day.today {
+    background: var(--Highlight);
+    color: var(--HighlightText);
+}
+
+.analog-clock {
+    display: block;
+    width: 120px;
+    height: 120px;
+    margin: 4px auto 10px;
+}
+
+.analog-face {
+    fill: var(--ButtonFace);
+}
+
+.analog-hour-mark { fill: var(--ActiveTitle); }
+.analog-minute-mark { fill: var(--ButtonShadow); }
+.analog-hour { stroke: var(--ButtonText); stroke-width: 5; }
+.analog-minute { stroke: var(--ButtonText); stroke-width: 3; }
+.analog-second { stroke: #800000; stroke-width: 1.5; }
+.analog-pin { fill: var(--ButtonText); }
+
+.digital-time {
+    text-align: center;
+}
+
+.datetime-zone {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 4px;
+}
+
+.zone-globe {
+    width: 32px;
+    height: 32px;
+}
+
+.zone-field {
+    align-self: stretch;
+}
+
+.datetime-footer {
+    padding: 0 4px;
+}
+
+/* ---------- Notepad ---------- */
+
+.notepad-text {
+    flex: 1;
+    min-height: 0;
+    margin: 0 2px 2px;
+    padding: 2px 4px;
+    border: none;
+    resize: none;
+    background: var(--ButtonHilight);
+    box-shadow: var(--bevel-sunken);
+    color: var(--ButtonText);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 17px;
+    outline: none;
+    overflow: auto;
+    tab-size: 8;
+}
+
+/* Markdown 预览：轻量的文档排版，链接可点击 */
+.notepad-preview {
+    flex: 1;
+    min-height: 0;
+    margin: 0 2px 2px;
+    padding: 10px 14px;
+    overflow: auto;
+    background: var(--ButtonHilight);
+    box-shadow: var(--bevel-sunken);
+    color: var(--ButtonText);
+    font-size: 14px;
+    line-height: 19px;
+    outline: none;
+    user-select: text;
+}
+
+.notepad-preview[hidden],
+.notepad-text[hidden] {
+    display: none;
+}
+
+.notepad-preview h1 { font-size: 22px; line-height: 26px; margin: 2px 0 8px; }
+.notepad-preview h2 { font-size: 17px; line-height: 22px; margin: 14px 0 6px; color: var(--ActiveTitle); }
+.notepad-preview h3 { font-size: 15px; margin: 10px 0 4px; }
+.notepad-preview p { margin: 0 0 8px; }
+.notepad-preview ul { margin: 0 0 8px 18px; list-style: square; }
+.notepad-preview li { margin-bottom: 3px; }
+.notepad-preview a { color: #0000ee; }
+.notepad-preview a:visited { color: #551a8b; }
+.notepad-preview code { font-family: var(--font-mono); background: var(--ButtonLight); padding: 0 2px; }
+
+.notepad-preview hr {
+    height: 2px;
+    margin: 12px 0;
+    border: none;
+    box-shadow: var(--etch-h);
+}
+
+.notepad-preview blockquote {
+    margin: 0 0 8px;
+    padding: 4px 8px;
+    border-left: 3px solid var(--ButtonShadow);
+    background: var(--Window);
+    color: #404040;
+}
+
+/* 预览工具条（多语言文档的翻译按钮） */
+.notepad-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-shrink: 0;
+    margin: 0 2px 2px;
+    padding: 2px 2px 2px 6px;
+}
+
+.notepad-toolbar[hidden] {
+    display: none;
+}
+
+.notepad-language {
+    color: var(--GrayText);
+}
+
+.notepad-translate {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-width: 0;
+    padding: 0 8px;
+}
+
+.notepad-translate img {
+    width: 16px;
+    height: 16px;
+}

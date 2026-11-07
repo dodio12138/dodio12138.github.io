@@ -1,0 +1,150 @@
+/* 开始菜单 + 关机画面。变量见 base.css */
+
+.start-menu,
+.start-submenu {
+    position: fixed;
+    z-index: var(--z-menu);
+    display: none;
+    padding: 3px;
+    background: var(--ButtonFace);
+    box-shadow: var(--bevel-window);
+    color: var(--ButtonText);
+    user-select: none;
+}
+
+.start-menu {
+    left: 2px;
+    bottom: calc(var(--taskbar-height) - 1px);
+}
+
+.start-menu.open {
+    display: flex;
+}
+
+.start-menu-band {
+    width: 22px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 6px;
+    background: linear-gradient(to top, var(--ActiveTitle), var(--GradientActiveTitle));
+}
+
+.start-menu-band span {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: 1px;
+    color: var(--ButtonFace);
+    white-space: nowrap;
+}
+
+.start-menu-band b {
+    color: var(--ButtonHilight);
+}
+
+.start-menu-list {
+    min-width: 170px;
+}
+
+.start-menu-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 6px 0 4px;
+    white-space: nowrap;
+    cursor: var(--cursor-default);
+}
+
+.start-menu-list > .start-menu-item {
+    height: 36px;
+}
+
+.start-menu-list > .start-menu-item img {
+    width: 32px;
+    height: 32px;
+}
+
+.start-submenu .start-menu-item {
+    height: 22px;
+    padding-right: 16px;
+}
+
+.start-submenu .start-menu-item img {
+    width: 16px;
+    height: 16px;
+}
+
+.start-menu-item .label {
+    flex: 1;
+}
+
+.start-menu-item.has-submenu::after {
+    content: '';
+    margin-left: 12px;
+    border-style: solid;
+    border-width: 4px 0 4px 4px;
+    border-color: transparent transparent transparent currentColor;
+}
+
+.start-menu-item:hover,
+.start-menu-item.active,
+.start-menu-item:focus-visible {
+    background: var(--Highlight);
+    color: var(--HighlightText);
+    outline: none;
+}
+
+.start-menu-separator {
+    height: 2px;
+    margin: 3px 2px;
+    box-shadow: var(--etch-h);
+}
+
+.start-submenu {
+    position: absolute;
+    left: 100%;
+    top: -3px;
+    min-width: 160px;
+    color: var(--ButtonText);
+}
+
+.start-menu-item.active > .start-submenu {
+    display: block;
+}
+
+.start-menu-empty {
+    padding: 2px 16px;
+    color: var(--GrayText);
+}
+
+/* ---------- 关机画面 ---------- */
+
+#shutdown-screen {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-overlay);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 0 16px;
+    background: black;
+    color: #ff8a00;
+    font-size: 28px;
+    line-height: 36px;
+    text-align: center;
+}
+
+#shutdown-screen.show {
+    display: flex;
+}
+
+#shutdown-screen small {
+    font-size: 15px;
+    color: #9a5300;
+}

@@ -1,0 +1,535 @@
+/* Levy Browser 窗口。变量见 base.css，菜单样式见 menu.css */
+
+.browser-wincontent {
+    flex-direction: column;
+    padding: 0;
+    background: var(--ButtonFace);
+    box-shadow: none;
+}
+
+/* ---------- 菜单栏 + 地球图标 ---------- */
+
+.browser-menubar-row {
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+    box-shadow: var(--etch-h);
+    padding-bottom: 2px;
+}
+
+.browser-menubar-row .menubar {
+    flex: 1;
+    margin-top: 1px;
+}
+
+.browser-throbber {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    margin: 1px 1px -38px 0;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 45%, #1a2a5a 0%, #000 70%);
+    box-shadow: var(--bevel-sunken);
+}
+
+.browser-throbber img {
+    width: 32px;
+    height: 32px;
+}
+
+/* 加载时卫星绕地球转 */
+.browser-throbber::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 4px;
+    height: 4px;
+    margin: -2px 0 0 -2px;
+    background: #fff;
+    box-shadow: 0 0 3px #9cf;
+    opacity: 0;
+    transform: rotate(0deg) translateX(15px);
+}
+
+.browser-loading .browser-throbber::after {
+    opacity: 1;
+    animation: browser-orbit 1.2s steps(16) infinite;
+}
+
+@keyframes browser-orbit {
+    to { transform: rotate(360deg) translateX(15px); }
+}
+
+/* ---------- 工具条（带把手的分段） ---------- */
+
+.browser-bands {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 2px 0;
+    box-shadow: var(--etch-h);
+}
+
+.browser-band {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+    padding-right: 4px;
+}
+
+.browser-band[hidden] {
+    display: none;
+}
+
+/* 每段左侧的竖把手 */
+.browser-band::before {
+    content: '';
+    flex-shrink: 0;
+    align-self: stretch;
+    width: 3px;
+    margin: 1px 3px 1px 3px;
+    box-shadow: var(--bevel-thin-raised);
+}
+
+.browser-toolbar {
+    gap: 0;
+    padding-right: 44px; /* 给右上角地球图标留位置 */
+}
+
+.browser-tool {
+    min-width: 50px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 2px 4px;
+    background: none;
+}
+
+.browser-tool img {
+    width: 20px;
+    height: 20px;
+    filter: grayscale(1) contrast(0.9);
+}
+
+.browser-tool:hover:not(:disabled) {
+    box-shadow: var(--bevel-thin-raised);
+}
+
+.browser-tool:hover:not(:disabled) img {
+    filter: none;
+}
+
+.browser-tool:active:not(:disabled) {
+    box-shadow: var(--bevel-shallow);
+    padding: 3px 3px 1px 5px;
+}
+
+.browser-tool:disabled {
+    color: var(--GrayText);
+    text-shadow: 1px 1px var(--ButtonHilight);
+    cursor: var(--cursor-default);
+}
+
+.browser-tool:disabled img {
+    filter: grayscale(1) opacity(0.45) drop-shadow(1px 1px 0 var(--ButtonHilight));
+}
+
+.browser-tool-separator {
+    align-self: stretch;
+    width: 2px;
+    margin: 4px 4px;
+    box-shadow: var(--etch-v);
+}
+
+.browser-band-title,
+.browser-address label {
+    flex-shrink: 0;
+    padding: 0 2px;
+}
+
+/* ---------- 地址栏 ---------- */
+
+.browser-combo {
+    flex: 1;
+    min-width: 0;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    background: var(--ButtonHilight);
+    box-shadow: var(--bevel-sunken);
+}
+
+.browser-page-icon {
+    width: 16px;
+    height: 16px;
+    margin: 0 3px 0 1px;
+    flex-shrink: 0;
+}
+
+.browser-combo input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: none;
+    background: none;
+    font: inherit;
+    outline: none;
+}
+
+.browser-combo-drop {
+    width: 16px;
+    height: 18px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    box-shadow: var(--bevel-raised);
+    cursor: var(--cursor-default);
+}
+
+.browser-combo-drop::after {
+    content: '';
+    border-style: solid;
+    border-width: 4px 4px 0 4px;
+    border-color: currentColor transparent transparent transparent;
+}
+
+.browser-combo-drop:active {
+    box-shadow: var(--bevel-pressed);
+}
+
+.browser-go {
+    height: 22px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 8px 0 6px;
+    background: none;
+}
+
+.browser-go:hover {
+    box-shadow: var(--bevel-thin-raised);
+}
+
+.browser-go:active {
+    box-shadow: var(--bevel-shallow);
+}
+
+.browser-go-arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 0 5px 7px;
+    border-color: transparent transparent transparent #00a800;
+}
+
+/* ---------- Links 栏 ---------- */
+
+.browser-linksbar {
+    height: 22px;
+    overflow: hidden;
+}
+
+.browser-quicklink {
+    flex-shrink: 0;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding: 0 5px 0 3px;
+    color: var(--ButtonText);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.browser-quicklink img {
+    width: 16px;
+    height: 16px;
+}
+
+.browser-quicklink:hover {
+    box-shadow: var(--bevel-thin-raised);
+}
+
+.browser-quicklink:active {
+    box-shadow: var(--bevel-shallow);
+}
+
+/* ---------- 页面区 ---------- */
+
+.browser-view {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    margin-top: 2px;
+    padding: 2px;
+    background: var(--ButtonHilight);
+    box-shadow: var(--bevel-sunken);
+}
+
+.browser-frame,
+.browser-page {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: white;
+}
+
+.browser-frame[hidden],
+.browser-page[hidden],
+.browser-status > .browser-progress[hidden] {
+    display: none;
+}
+
+.browser-page {
+    overflow-y: auto;
+    color: var(--WindowText);
+    font-size: 15px;
+    line-height: 20px;
+    outline: none;
+}
+
+.browser-page h1 {
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.browser-page h2 {
+    margin: 18px 0 8px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--ButtonLight);
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--ActiveTitle);
+}
+
+.browser-page p {
+    margin-bottom: 8px;
+}
+
+.browser-page hr {
+    height: 2px;
+    margin: 12px 0;
+    border: none;
+    box-shadow: var(--etch-h);
+}
+
+.browser-page ul {
+    margin: 0 0 12px 20px;
+    list-style: square;
+}
+
+.browser-page li {
+    margin-bottom: 4px;
+}
+
+.browser-muted {
+    color: var(--GrayText);
+}
+
+/* 首页 */
+
+.browser-banner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 24px;
+    background: var(--title-gradient);
+    color: var(--TitleText);
+}
+
+.browser-banner p {
+    margin: 2px 0 0;
+    opacity: 0.85;
+}
+
+.browser-banner-globe {
+    width: 32px;
+    height: 32px;
+}
+
+.browser-panel {
+    padding: 14px 24px 4px;
+}
+
+.browser-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 8px 16px;
+}
+
+.browser-links a {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    color: #0000ee;
+    text-decoration: none;
+}
+
+.browser-links a:visited {
+    color: #551a8b;
+}
+
+.browser-links .link-title {
+    text-decoration: underline;
+}
+
+.browser-links img {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.browser-links small {
+    display: block;
+    color: var(--GrayText);
+    font-size: 13px;
+    line-height: 15px;
+}
+
+.browser-footer {
+    padding: 8px 24px 16px;
+    color: var(--GrayText);
+    font-size: 13px;
+    text-align: center;
+}
+
+/* 关于页 */
+
+.browser-about {
+    max-width: 420px;
+    margin: 32px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.browser-about-globe {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 8px;
+}
+
+/* 错误页 */
+
+.browser-error {
+    display: flex;
+    gap: 16px;
+    max-width: 560px;
+    padding: 24px 28px;
+}
+
+.browser-error > img {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+}
+
+.browser-error h1 {
+    margin-bottom: 8px;
+}
+
+.browser-error-actions {
+    display: flex;
+    gap: 6px;
+    margin: 4px 0 12px;
+}
+
+.browser-error-actions button {
+    min-width: 80px;
+    padding: 4px 12px;
+    box-shadow: var(--bevel-raised);
+}
+
+.browser-error-actions button:active {
+    box-shadow: var(--bevel-pressed);
+}
+
+.browser-detail {
+    font-size: 13px;
+    word-break: break-all;
+}
+
+/* ---------- 状态栏 ---------- */
+
+.browser-status {
+    display: flex;
+    gap: 2px;
+    height: 22px;
+    flex-shrink: 0;
+    padding-top: 2px;
+}
+
+.browser-status[hidden] {
+    display: none;
+}
+
+.browser-status > span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 6px;
+    box-shadow: var(--bevel-shallow);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.browser-status > .browser-status-text {
+    flex: 1;
+    min-width: 0;
+    display: block;
+    line-height: 20px;
+}
+
+.browser-status > .browser-progress {
+    width: 120px;
+    padding: 3px;
+}
+
+.browser-progress-bar {
+    height: 100%;
+    width: 0;
+    background: repeating-linear-gradient(to right, var(--Highlight) 0 8px, transparent 8px 10px);
+}
+
+.browser-status > .size-grip {
+    padding: 0;
+    box-shadow: none;
+}
+
+.browser-zone img {
+    width: 16px;
+    height: 16px;
+}
+
+/* ---------- 窄屏 ---------- */
+
+@media (max-width: 520px) {
+    .browser-tool {
+        min-width: 32px;
+        height: 30px;
+    }
+
+    .browser-tool .text,
+    .browser-address label,
+    .browser-linksbar,
+    .browser-status > .browser-zone,
+    .browser-go span:last-child {
+        display: none;
+    }
+
+    .browser-toolbar {
+        padding-right: 42px;
+    }
+
+}

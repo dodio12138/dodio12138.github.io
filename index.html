@@ -1,121 +1,221 @@
-<!--
- * @Author: dodio12138 1159715241@qq.com
- * @Date: 2023-04-04 01:30:09
- * @LastEditors: dodio12138 1159715241@qq.com
- * @LastEditTime: 2023-08-17 03:59:09
- * @FilePath: \dodio12138.github.io\index.html
- * @Description:
--->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Levy's retro Windows 95 style desktop: projects, terminal, blog and photos.">
     <meta name="google-site-verification" content="HKBa6nygRazpup6hj2qCoD_GkK5QwVoO-rIbLxgJYp0" />
+    <link rel="stylesheet" href="src/css/base.css">
     <link rel="stylesheet" href="src/css/index.css">
     <link rel="stylesheet" href="src/css/windows.css">
+    <link rel="stylesheet" href="src/css/menu.css">
     <link rel="stylesheet" href="src/css/instagram.css">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="src/css/browser.css">
+    <link rel="stylesheet" href="src/css/apps.css">
+    <link rel="stylesheet" href="src/css/startmenu.css">
+    <link rel="icon" href="favicon.ico">
     <link rel="manifest" href="manifest.json">
     <title>Levy</title>
 </head>
 
-<body oncontextmenu="return false;">
+<body>
+    <!-- 桌面图标：左侧为系统和站内图标，右侧为各平台应用。data-action 调用 DesktopActions，<a> 打开链接（见 desktop.js） -->
     <div id="DeskBackground">
-        <div class="app-box">
-            <app class="app">
-                <img class="icon" src="res/img/computer_explorer_cool-0.png">
-                <br>
-                <div class="app-title">Levy's PC</div>
-            </app>
+        <div class="desktop-icons">
+            <div class="app-box">
+                <button class="app" type="button">
+                    <img class="icon" src="res/icon/32/computer.png" alt="">
+                    <span class="app-title">Levy's PC</span>
+                </button>
+            </div>
+            <div class="app-box">
+                <button class="app" type="button">
+                    <img class="icon" src="res/icon/32/recycle-bin.png" alt="">
+                    <span class="app-title">Recycle Bin</span>
+                </button>
+            </div>
+            <div class="app-box">
+                <button class="app" type="button" data-action="browser" title="Every link opens here.">
+                    <img class="icon" src="res/icon/32/browser.png" alt="">
+                    <span class="app-title">Levy Browser</span>
+                </button>
+            </div>
+            <div class="app-box">
+                <button class="app" type="button" data-action="projects" title="Things I made in my spare time.">
+                    <img class="icon" src="res/icon/32/folder.png" alt="">
+                    <span class="app-title">My Projects</span>
+                </button>
+            </div>
+            <div class="app-box">
+                <a class="app" href="https://dodio12138.github.io/fun-pages/" title="Some interesting HTML stuffs.">
+                    <img class="icon" src="res/icon/32/web-files.png" alt="">
+                    <span class="app-title">FunPages</span>
+                </a>
+            </div>
+            <div class="app-box">
+                <button class="app" type="button" data-action="meterminal" title="I locked myself in the terminal !">
+                    <img class="icon" src="res/icon/32/console.png" alt="">
+                    <span class="app-title">MeTerminal</span>
+                </button>
+            </div>
+            <div class="app-box">
+                <a class="app" href="https://dodio12138.github.io/blog/">
+                    <img class="icon" src="res/icon/32/blog.png" alt="">
+                    <span class="app-title">Dodio's Blog</span>
+                </a>
+            </div>
+            <div class="app-box">
+                <button class="app" type="button" data-action="aboutme" data-type="Markdown Document" title="About me - links included.">
+                    <img class="icon" src="res/icon/32/text-file.png" alt="">
+                    <span class="app-title">AboutMe.md</span>
+                </button>
+            </div>
+            <div class="app-box" hidden>
+                <a class="app" href="src/page/BunnyGame.html">
+                    <img class="icon" src="res/icon/32/bunny.png" alt="">
+                    <span class="app-title">BunnyGame</span>
+                </a>
+            </div>
         </div>
-        <div class="app-box">
-            <app class="app">
-                <img class="icon" src="res/img/recycle_bin_empty_cool-0.png">
-                <br>
-                <div class="app-title">Recycle Bin</div>
-            </app>
-        </div>
-        <div class="app-box" ondblclick="docwindow()">
-            <app class="app">
-                <img class="icon" src="res/img/directory_closed_cool-0.png">
-                <br>
-                <div class="app-title">Documents</div>
-            </app>
-        </div>
-        <div class="app-box">
-            <a id="FunPages" class="app" href="https://dodio12138.github.io/fun-pages/"
-                title="Some interesting HTML stuffs.">
-                <img class="icon" src="res/img/web_file_set-4.png">
-                <br>
-                <div class="app-title">FunPages</div>
-            </a>
-        </div>
-        <div class="app-box" ondblclick="meterminalwin()">
-            <app id="MeTerminal" class="app"
-                title="I locked myself in the terminal !">
-                <img class="icon" src="res/img/console_prompt-0.png">
-                <br>
-                <div class="app-title">MeTerminal</div>
-            </app>
-        </div>
-        <div class="app-box">
-            <a id="Blog" class="app" href="https://dodio12138.github.io/blog/" >
-                <img class="icon" src="res/img/blog.png">
-                <br>
-                <div class="app-title">Dodio's Blog</div>
-            </a>
-        </div>
-        <div class="app-box" onclick="instagramwin()">
-            <app class="app" title="Instagram - dodio_12138">
-                <img class="icon" src="res/img/Ins_logo_pixel.png">
-                <br>
-                <div class="app-title">Instagram.exe</div>
-            </app>
-        </div>
-        <div class="app-box">
-            <a id="BunnyGame" class="app" href="src/page/BunnyGame.html" style="display:none">
-                <img class="icon" src="res/img/tuStatic.png">
-                <br>
-                <div class="app-title">BunnyGame</div>
-            </a>
+        <div class="desktop-icons desktop-icons-right">
+            <div class="app-box">
+                <button class="app" type="button" data-action="github" title="Levy's repositories on GitHub">
+                    <img class="icon" src="res/icon/32/github.png" alt="">
+                    <span class="app-title">GitHub</span>
+                </button>
+            </div>
+            <div class="app-box">
+                <button class="app" type="button" data-action="itch" title="Levy's games on itch.io">
+                    <img class="icon" src="res/icon/32/itch.png" alt="">
+                    <span class="app-title">itch.io</span>
+                </button>
+            </div>
+            <div class="app-box">
+                <button class="app" type="button" data-action="bilibili" title="Levy's videos on Bilibili">
+                    <img class="icon" src="res/icon/32/bilibili.png" alt="">
+                    <span class="app-title">Bilibili</span>
+                </button>
+            </div>
+            <div class="app-box">
+                <button class="app" type="button" data-action="instagram" title="Instagram - dodio_12138">
+                    <img class="icon" src="res/icon/32/instagram.png" alt="">
+                    <span class="app-title">Instagram</span>
+                </button>
+            </div>
         </div>
     </div>
+
     <div id="windows"></div>
-    <nav id="BottomBar" class="windows">
-        <button class="start-button" title="Click here to begin.">
-            <img src="./res/img/windows-0.png">
-            <b>Start</b>
+
+    <nav id="BottomBar">
+        <button class="start-button" type="button" title="Click here to begin." aria-haspopup="menu"
+            aria-expanded="false" aria-controls="start-menu">
+            <img src="res/icon/16/windows.png" alt="">
+            <span>Start</span>
         </button>
-        <div class="BottomBar-divider"></div>
+        <div class="taskbar-divider"></div>
         <div class="tasks-bar"></div>
-        <div class="BottomBar-divider"></div>
-        <div class="tray inset-shallow">
-            <div id="taskbar-time">00:00:00</div>
+        <div class="taskbar-divider"></div>
+        <div class="tray">
+            <div id="taskbar-time">0:00 AM</div>
         </div>
     </nav>
+
+    <!-- 开始菜单：data-action / data-href 由 startmenu.js 处理 -->
+    <div id="start-menu" class="start-menu" role="menu">
+        <div class="start-menu-band"><span><b>Levy</b>95</span></div>
+        <ul class="start-menu-list">
+            <li class="start-menu-item has-submenu" role="menuitem">
+                <img src="res/icon/32/folder.png" alt="">
+                <span class="label"><u>P</u>rograms</span>
+                <ul class="start-submenu" role="menu">
+                    <li class="start-menu-item" role="menuitem" data-action="browser">
+                        <img src="res/icon/16/browser.png" alt="">
+                        <span class="label">Levy Browser</span>
+                    </li>
+                    <li class="start-menu-item" role="menuitem" data-action="notepad">
+                        <img src="res/icon/16/notepad.png" alt="">
+                        <span class="label">Notepad</span>
+                    </li>
+                    <li class="start-menu-item" role="menuitem" data-action="meterminal">
+                        <img src="res/icon/16/console.png" alt="">
+                        <span class="label">MeTerminal</span>
+                    </li>
+                    <li class="start-menu-item" role="menuitem" data-action="instagram">
+                        <img src="res/icon/16/instagram.png" alt="">
+                        <span class="label">Instagram</span>
+                    </li>
+                    <li class="start-menu-item" role="menuitem" data-action="github">
+                        <img src="res/icon/16/github.png" alt="">
+                        <span class="label">GitHub</span>
+                    </li>
+                    <li class="start-menu-item" role="menuitem" data-action="itch">
+                        <img src="res/icon/16/itch.png" alt="">
+                        <span class="label">itch.io</span>
+                    </li>
+                    <li class="start-menu-item" role="menuitem" data-action="bilibili">
+                        <img src="res/icon/16/bilibili.png" alt="">
+                        <span class="label">Bilibili</span>
+                    </li>
+                    <li class="start-menu-item" role="menuitem" data-href="https://dodio12138.github.io/fun-pages/">
+                        <img src="res/icon/16/web-files.png" alt="">
+                        <span class="label">FunPages</span>
+                    </li>
+                    <li class="start-menu-item" role="menuitem" data-href="https://dodio12138.github.io/blog/">
+                        <img src="res/icon/16/blog.png" alt="">
+                        <span class="label">Dodio's Blog</span>
+                    </li>
+                </ul>
+            </li>
+            <li class="start-menu-item has-submenu" role="menuitem">
+                <img src="res/icon/32/web-files.png" alt="">
+                <span class="label"><u>M</u>y Projects</span>
+                <ul id="start-projects" class="start-submenu" role="menu">
+                    <li class="start-menu-empty">(Loading...)</li>
+                </ul>
+            </li>
+            <li class="start-menu-item has-submenu" role="menuitem">
+                <img src="res/icon/32/computer.png" alt="">
+                <span class="label"><u>S</u>ettings</span>
+                <ul class="start-submenu" role="menu">
+                    <li class="start-menu-item" role="menuitem" data-action="display">
+                        <img src="res/icon/16/computer.png" alt="">
+                        <span class="label">Display Properties</span>
+                    </li>
+                    <li class="start-menu-item" role="menuitem" data-action="datetime">
+                        <img src="res/icon/16/clock.png" alt="">
+                        <span class="label">Date/Time</span>
+                    </li>
+                </ul>
+            </li>
+            <li class="start-menu-separator" role="separator"></li>
+            <li class="start-menu-item" role="menuitem" data-action="shutdown">
+                <img src="res/icon/32/windows.png" alt="">
+                <span class="label">Sh<u>u</u>t Down...</span>
+            </li>
+        </ul>
+    </div>
+
+    <div id="shutdown-screen">
+        <div>It's now safe to turn off<br>your computer.</div>
+        <small>Click anywhere to restart</small>
+    </div>
+
     <script src="src/js/main.js"></script>
+    <script src="src/js/menu.js"></script>
     <script src="src/js/window.js"></script>
-    <script src="src/js/docwindow.js"></script>
+    <script src="src/js/desktop.js"></script>
+    <script src="src/js/projects.js"></script>
+    <script src="src/js/notepad.js"></script>
     <script src="src/js/meterminal.js"></script>
     <script src="src/js/instagram.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function () {
-                navigator.serviceWorker.register('/sw.js', { scope: '/' })
-                    .then(function (registration) {
-                        // 注册成功
-                        console.log('ServiceWorker registration successful');
-                    })
-                    .catch(function (err) {
-                        // 注册失败:(
-                        console.log('ServiceWorker registration failed');
-                    });
-            });
-        }
-    </script>
+    <script src="src/js/browser.js"></script>
+    <script src="src/js/github.js"></script>
+    <script src="src/js/itch.js"></script>
+    <script src="src/js/bilibili.js"></script>
+    <script src="src/js/startmenu.js"></script>
+    <script src="src/js/clock.js"></script>
 </body>
 
 </html>

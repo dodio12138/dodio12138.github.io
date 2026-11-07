@@ -3,39 +3,34 @@
     src: url('../../res/fonts/FRANKGO.ttf');
 }
 
-html{
-    width:100%;
-	height:100%;
-    
+:root {
+    --ink: rgb(28, 28, 28);
 }
 
-body{
-    width:100%;
-    height:100%;
-    padding: 0px;
-    margin: 0px;
-    background-color: #e9e9e9;
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-
-#line {
-    border: none;
-    border-top: 0.8vw solid rgb(28, 28, 28);
-    transform: translateX(-3vw);
+    background-color: #e9e9e9;
 }
 
 #card {
-    font-family:'FRANKGO';
     width: 60vw;
     height: 37.08vw;
     border-radius: 0.5vw;
     background: #e0e0e0;
-    box-shadow:  13px 13px 28px #bcbcbc,
-                -13px -13px 28px #ffffff;
-    backface-visibility:hidden;
+    box-shadow: 13px 13px 28px #bcbcbc, -13px -13px 28px #ffffff;
+    font-family: FRANKGO;
+    color: var(--ink);
+    user-select: none;
+    backface-visibility: hidden;
     perspective: 100vw;
     transform: rotate3d(1, 1, -1, 45deg);
 }
@@ -43,20 +38,22 @@ body{
 #companyName {
     padding: 3vw;
     font-size: 4vw;
-    color: rgb(28, 28, 28);
-    user-select: none;
     font-weight: bolder;
 }
 
+#line {
+    border: none;
+    border-top: 0.8vw solid var(--ink);
+    transform: translateX(-3vw);
+}
+
 #info {
-    font-size: 1.1vw;
-    padding-top: 8vw;
-    padding-left: 3vw;
-    color: rgb(28, 28, 28);
-    user-select: none;
     display: flex;
     flex-direction: column;
     gap: 0.5vw;
+    padding-top: 8vw;
+    padding-left: 3vw;
+    font-size: 1.1vw;
 }
 
 #name {
@@ -64,29 +61,18 @@ body{
     font-weight: bolder;
 }
 
-#career {
-    padding-top: 0.8vw;
-}
-
+#career,
 #number {
     padding-top: 0.8vw;
-    color: inherit;
-    text-decoration: none;
-    display: inline-block;
-    width: max-content;
 }
 
-#e-mail {
-    color: inherit;
-    text-decoration: none;
+#info a {
     display: inline-block;
     width: max-content;
+    color: inherit;
+    text-decoration: none;
 }
 
 #website {
     font-weight: bold;
-    color: inherit;
-    text-decoration: none;
-    display: inline-block;
-    width: max-content;
 }

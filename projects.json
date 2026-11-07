@@ -1,0 +1,34 @@
+{
+    "projects": [
+        {
+            "name": "BadgeGenerator",
+            "description": "Easy and fast badge generation based on shields.io, with support for custom icons.",
+            "url": "https://dodio12138.github.io/badge-generator/src/index.html"
+        },
+        {
+            "name": "AutoTasker",
+            "description": "A multi-step auto clicker.",
+            "url": "https://github.com/dodio12138/auto-tasker"
+        },
+        {
+            "name": "MeTerminal",
+            "description": "A web page that simulates a terminal.",
+            "url": "https://dodio12138.github.io/MeTerminal/src/MePC.html"
+        },
+        {
+            "name": "ScaffoldGenerator",
+            "description": "A project template generator that creates a .bat command for a project's folders and files.",
+            "url": "https://github.com/dodio12138/pro-tem-craft"
+        },
+        {
+            "name": "FxxkingShortVideo",
+            "description": "A Chrome extension that removes Bilibili videos shorter than 30 seconds.",
+            "url": "https://github.com/dodio12138/against-short-videos"
+        },
+        {
+            "name": "CyberBookcase",
+            "description": "A cyber bookcase that shows the books you've read.",
+            "url": "https://dodio12138.github.io/CyberBookcase/"
+        }
+    ]
+}

@@ -1,22 +1,21 @@
-html,body 
-{
-    height: 100%; /* 设置容器的宽度，可以根据需要调整 */
+/* 兔子固定在右下角（与 404.css 相同布局） */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
     padding: 0;
-    background-color: #e4c7a5;
-
-    margin: 0px;
-    display: flex; /* 设置为弹性盒子 */
-    justify-content: flex-end; /* 将图片放置在容器的右侧 */
-    align-items: flex-end; /* 将图片放置在容器的底部 */
-
 }
 
-*{
-    box-sizing: border-box;
-    padding: 0px;
-    margin: 0px;
+html,
+body {
+    height: 100%;
+    background-color: #e4c7a5;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 #tuGif {
-    max-width: 35%; /* 设置图片的最大宽度，避免图片超出容器 */
+    max-width: 35%;
+    cursor: pointer;
 }

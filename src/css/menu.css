@@ -1,0 +1,143 @@
+/* 通用弹出菜单与菜单栏（menu.js）。变量见 base.css */
+
+.menu-popup {
+    position: fixed;
+    z-index: var(--z-menu);
+    min-width: 160px;
+    padding: 3px;
+    background: var(--ButtonFace);
+    box-shadow: var(--bevel-window);
+    color: var(--ButtonText);
+    user-select: none;
+}
+
+.menu-entry {
+    display: grid;
+    grid-template-columns: 20px 1fr auto;
+    align-items: center;
+    height: 20px;
+    padding-right: 6px;
+    white-space: nowrap;
+    cursor: var(--cursor-default);
+}
+
+.menu-entry.bold .menu-label {
+    font-weight: bold;
+}
+
+.menu-entry.active {
+    background: var(--Highlight);
+    color: var(--HighlightText);
+}
+
+.menu-entry.disabled {
+    color: var(--GrayText);
+}
+
+.menu-entry.disabled:not(.active) {
+    text-shadow: 1px 1px var(--ButtonHilight);
+}
+
+.menu-mark {
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+}
+
+.menu-mark img {
+    width: 16px;
+    height: 16px;
+}
+
+.menu-label {
+    padding-right: 8px;
+}
+
+.menu-shortcut {
+    padding-left: 18px;
+}
+
+.menu-arrow {
+    justify-self: end;
+    width: 0;
+    height: 0;
+    margin-left: 18px;
+    border-style: solid;
+    border-width: 4px 0 4px 4px;
+    border-color: transparent transparent transparent currentColor;
+}
+
+.menu-separator {
+    height: 2px;
+    margin: 3px 1px;
+    box-shadow: var(--etch-h);
+}
+
+/* ---------- 下拉列表（组合框展开后的列表：白底、1px 黑框） ---------- */
+
+.menu-popup.listbox {
+    min-width: 0;
+    padding: 0;
+    background: var(--ButtonHilight);
+    box-shadow: none;
+    border: 1px solid var(--ButtonDkShadow);
+}
+
+.menu-popup.listbox .menu-entry {
+    grid-template-columns: 20px 1fr;
+    height: 18px;
+    padding-right: 4px;
+}
+
+.menu-popup.listbox .menu-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.menu-popup.listbox .menu-shortcut,
+.menu-popup.listbox .menu-arrow {
+    display: none;
+}
+
+/* ---------- 提示框（替代浏览器自带 title 提示） ---------- */
+
+.tooltip {
+    position: fixed;
+    z-index: var(--z-overlay);
+    max-width: 320px;
+    padding: 1px 4px;
+    background: #ffffe1;
+    border: 1px solid var(--ButtonDkShadow);
+    color: var(--ButtonText);
+    font-size: 13px;
+    line-height: 16px;
+    pointer-events: none;
+    white-space: pre-line;
+}
+
+/* ---------- 菜单栏 ---------- */
+
+.menubar {
+    display: flex;
+    flex-shrink: 0;
+    height: 20px;
+    padding: 0 1px;
+}
+
+.menubar-item {
+    padding: 0 7px;
+    background: none;
+    cursor: var(--cursor-default);
+}
+
+.menubar-item:hover {
+    box-shadow: var(--bevel-thin-raised);
+}
+
+.menubar-item.open {
+    box-shadow: var(--bevel-shallow);
+}
+
+.menubar-item:focus-visible {
+    outline: none;
+}

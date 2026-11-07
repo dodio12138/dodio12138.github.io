@@ -1,230 +1,117 @@
-.instagram-wincontent {
-    display: block;
-    padding: 0;
-    overflow: hidden;
-    background: var(--ButtonFace);
-    box-sizing: border-box;
-    max-height: calc(100vh - 44px);
-    font-family: W95FA, "MS Sans Serif", Arial, sans-serif;
-}
+/* Instagram 窗口：个人信息条、网格 / 列表、照片查看器。共用样式见 apps.css 和 windows.css（选项卡） */
 
-.instagram-shell {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    color: black;
-    background: var(--ButtonFace);
-}
-
-.instagram-menu {
-    height: 30px;
-    display: flex;
-    align-items: center;
-    gap: 22px;
-    padding: 0 10px;
-    font-size: 18px;
-}
-
-.instagram-menu span::first-letter {
-    text-decoration: underline;
-}
-
-.instagram-profile {
-    padding: 0 10px 8px;
-}
-
-.instagram-profile h2 {
-    margin: 4px 0 8px;
-    text-align: center;
-    font-size: 22px;
-    line-height: 24px;
-}
-
-.instagram-divider {
-    height: 2px;
-    margin-bottom: 10px;
-    border-top: 1px solid black;
-    border-bottom: 1px solid white;
-}
-
-.instagram-profile-row {
-    display: flex;
-    align-items: center;
-    gap: 18px;
+.instagram-header {
+    align-items: flex-start;
 }
 
 .instagram-avatar {
-    width: 82px;
-    height: 82px;
-    display: grid;
-    place-items: center;
-    flex: 0 0 auto;
-    overflow: hidden;
-    border-radius: 50%;
-    background: black;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    object-fit: cover;
+    padding: 2px;
+    background: var(--ButtonHilight);
+    box-shadow: var(--bevel-sunken);
 }
 
-.instagram-avatar img {
-    width: 58px;
-    height: 58px;
+.instagram-header .app-header-text span {
+    white-space: normal;
 }
 
-.instagram-profile-main {
+.instagram-header .instagram-bio {
+    color: var(--ButtonText);
+    font-family: var(--font-emoji);
+}
+
+.instagram-header .btn {
+    flex-shrink: 0;
     min-width: 0;
-    flex: 1;
 }
 
-.instagram-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    text-align: center;
-}
-
-.instagram-stats strong,
-.instagram-stats span {
-    display: block;
-}
-
-.instagram-stats strong {
-    font-size: 18px;
-    line-height: 20px;
-}
-
-.instagram-stats span {
-    font-size: 16px;
-    line-height: 18px;
-}
-
-.instagram-follow,
-.instagram-tabs button,
-.instagram-bottom-nav button {
-    border: 2px solid;
-    border-color: var(--ButtonHilight) var(--ButtonShadow) var(--ButtonShadow) var(--ButtonHilight);
-    background: var(--ButtonFace);
-    color: black;
-    box-shadow: inset 1px 1px white, inset -1px -1px black;
-    text-decoration: none;
-    cursor: url('../../../../res/img/Cursor_15.cur'), default;
-}
-
-.instagram-follow {
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
-    font-size: 18px;
-}
-
-.instagram-bio {
-    display: grid;
-    gap: 2px;
-    margin-top: 8px;
-    font-size: 16px;
-    line-height: 18px;
-    font-family: W95FA, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
-}
-
-.instagram-bio a {
-    color: black;
-    text-decoration: none;
-}
-
-.instagram-tabs,
-.instagram-bottom-nav {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 4px;
-    padding: 4px;
-    border-top: 1px solid black;
-    border-bottom: 1px solid var(--ButtonHilight);
-}
-
-.instagram-tabs button,
-.instagram-bottom-nav button {
-    height: 34px;
-    font-family: W95FA, sans-serif;
-    font-size: 24px;
-}
-
-.instagram-tabs button.active,
-.instagram-bottom-nav button.active {
-    background:
-        radial-gradient(#b6b6b6 1px, transparent 1px) 0 0 / 4px 4px,
-        var(--ButtonFace);
-}
-
+/* 网格：三列正方形照片 */
 .instagram-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, minmax(0, 1fr));
-    gap: 2px;
-    min-height: 0;
-    flex: 1;
+    gap: 4px;
     padding: 4px;
-    overflow-y: auto;
-    border-top: 1px solid black;
-    background: white;
 }
 
-.post {
-    display: grid;
-    place-items: center;
-    overflow: hidden;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    font-size: 18px;
-    line-height: 20px;
+.instagram-grid .instagram-item {
+    aspect-ratio: 1;
+    padding: 2px;
+    cursor: var(--cursor-pointer);
 }
 
-.post img {
+.instagram-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    background: #d7d7d7;
+    display: block;
+    background: var(--ButtonLight);
 }
 
-.instagram-bottom-nav {
-    grid-template-columns: repeat(5, 1fr);
-    border-bottom: 0;
+.instagram-grid .instagram-item.selected {
+    background: var(--Highlight);
 }
 
-@media (max-width: 520px) {
-    #instagramwin {
-        left: 4px !important;
-        right: 4px;
-        width: auto;
-    }
+/* 列表：缩略图 + 说明 */
+.instagram-list {
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+}
 
-    #instagramwin .wincontent {
-        width: calc(100vw - 22px) !important;
-        height: calc(100vh - 78px) !important;
-    }
+.instagram-list .instagram-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 3px;
+    cursor: var(--cursor-default);
+}
 
-    #instagramwin windowTitlebar {
-        width: calc(100vw - 12px) !important;
-    }
+.instagram-list .instagram-item img {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+}
 
-    .instagram-menu {
-        gap: 12px;
-        font-size: 16px;
-    }
+.instagram-item-text {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
 
-    .instagram-profile-row {
-        gap: 10px;
-    }
+.instagram-item-text span {
+    color: var(--GrayText);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
-    .instagram-avatar {
-        width: 74px;
-        height: 74px;
-    }
+.instagram-list .instagram-item.selected {
+    background: var(--Highlight);
+    color: var(--HighlightText);
+}
 
-    .instagram-stats strong,
-    .instagram-stats span,
-    .instagram-bio {
-        font-size: 15px;
-    }
+.instagram-list .instagram-item.selected .instagram-item-text span {
+    color: var(--HighlightText);
+}
+
+/* 照片查看器 */
+.instagram-photo {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    place-items: center;
+    padding: 4px;
+    background: var(--ButtonShadow);
+    box-shadow: var(--bevel-sunken);
+}
+
+.instagram-photo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    box-shadow: 0 0 0 1px var(--ButtonDkShadow);
 }

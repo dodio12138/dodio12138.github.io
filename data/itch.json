@@ -1,0 +1,98 @@
+{
+    "updated": "2026-11-07T00:56:16.255Z",
+    "profile": {
+        "url": "https://dodio12138.itch.io/"
+    },
+    "items": [
+        {
+            "id": "5312787",
+            "title": "Let the Boss Win",
+            "url": "https://dodio12138.itch.io/let-the-boss-win",
+            "text": "Freeze time. Rig the shot. Keep the boss happy.",
+            "cover": "https://img.itch.zone/aW1nLzMxOTE2MjAyLnBuZw==/315x250%23c/B40u1D.png",
+            "genre": "Puzzle",
+            "web": true,
+            "platforms": [
+                "Windows",
+                "Linux",
+                "macOS"
+            ]
+        },
+        {
+            "id": "5231330",
+            "title": "Final_Final_v7 (Demo)",
+            "url": "https://dodio12138.itch.io/final-final-v7",
+            "text": "A hand-drawn floor-plan puzzle about clients who always go with the first version.",
+            "cover": "https://img.itch.zone/aW1nLzMxMzU3OTU4LnBuZw==/315x250%23c/%2FV9ZFi.png",
+            "genre": "Puzzle",
+            "web": true,
+            "platforms": []
+        },
+        {
+            "id": "5192429",
+            "title": "终端三国",
+            "url": "https://dodio12138.itch.io/sanguo",
+            "text": "汉末三国终端风格大战略：选剧本、择势力，在实时推演中逐鹿天下。",
+            "cover": "https://img.itch.zone/aW1nLzMxMTAxMjc2LnBuZw==/315x250%23c/TquiwM.png",
+            "genre": "Strategy",
+            "web": true,
+            "platforms": []
+        },
+        {
+            "id": "2218053",
+            "title": "MeTerminal",
+            "url": "https://dodio12138.itch.io/me-terminal",
+            "text": "A resume system for web simulation terminals",
+            "cover": "https://img.itch.zone/aW1nLzEzMTIyNzkwLmpwZw==/315x250%23c/LH2T%2F4.jpg",
+            "genre": "",
+            "web": true,
+            "platforms": []
+        },
+        {
+            "id": "2132547",
+            "title": "ReBirth",
+            "url": "https://dodio12138.itch.io/rebirth",
+            "text": "Infinite Rebirth",
+            "cover": "https://img.itch.zone/aW1nLzEyNTY3NDg5LnBuZw==/315x250%23c/UJkQ4w.png",
+            "genre": "Platformer",
+            "web": true,
+            "platforms": [
+                "Windows"
+            ]
+        },
+        {
+            "id": "2065508",
+            "title": "PlayEverythingLikeMusic",
+            "url": "https://dodio12138.itch.io/playeverythinglikemusic",
+            "text": "Everything Play",
+            "cover": "https://img.itch.zone/aW1nLzEyMTQ1ODM0LnBuZw==/315x250%23c/ErRmam.png",
+            "genre": "",
+            "web": false,
+            "platforms": [
+                "Windows"
+            ]
+        },
+        {
+            "id": "2033478",
+            "title": "BmpEncryptor",
+            "url": "https://dodio12138.itch.io/bmpencryptor",
+            "text": "Turn all files into BMP images!",
+            "cover": "https://img.itch.zone/aW1nLzExOTU5Mjc5LnBuZw==/315x250%23c/u%2F1smJ.png",
+            "genre": "",
+            "web": false,
+            "platforms": [
+                "Windows"
+            ]
+        },
+        {
+            "id": "2014211",
+            "title": "DamJam",
+            "url": "https://xarce.itch.io/damjam",
+            "text": "Amidst a series of natural weather storms You must drain this weak dam to prevent it from collapse",
+            "cover": "https://img.itch.zone/aW1nLzExODQ0NzMyLmpwZw==/315x250%23c/0tO9%2F1.jpg",
+            "genre": "",
+            "web": true,
+            "platforms": []
+        }
+    ]
+}
