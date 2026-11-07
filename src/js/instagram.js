@@ -5,7 +5,7 @@
 const INSTAGRAM_PROFILE = {
     username: 'dodio_12138',
     displayName: 'Levy',
-    avatar: asset('img/instagram/avatar-square.jpg'),
+    avatar: asset('img/instagram/avatar-round.png'),
     url: 'https://www.instagram.com/dodio_12138/',
     stats: {
         posts: 13,
