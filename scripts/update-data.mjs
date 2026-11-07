@@ -39,11 +39,17 @@ function readJson(file, fallback) {
 }
 
 // 播放量、星标等每天都会变的数字：只有它们变化时，最多每周写一次，避免每天都产生提交
-const VOLATILE = new Set(['plays', 'comments', 'stars', 'forks', 'followers', 'following', 'publicRepos', 'updated']);  // Instagram 粉丝数同理
+// pushed（仓库最近推送时间）也算易变：机器人自己的提交每天都会改变本仓库的推送时间
+const VOLATILE = new Set(['plays', 'comments', 'stars', 'forks', 'followers', 'following', 'publicRepos', 'pushed', 'updated']);  // Instagram 粉丝数同理
 const WEEK = 7 * 24 * 3600 * 1000;
 
+// 比较“结构”时去掉易变字段，并忽略列表顺序（排序依据往往就是易变字段）
 function stable(data) {
-    return JSON.stringify(data, (key, value) => (VOLATILE.has(key) ? undefined : value));
+    const strip = (value) => JSON.stringify(value, (key, v) => (VOLATILE.has(key) ? undefined : v));
+    return JSON.stringify({
+        ...JSON.parse(strip(data)),
+        items: (data.items || []).map(strip).sort()
+    });
 }
 
 // 内容没变就不写；新视频、新游戏、新仓库等结构变化立即写入
@@ -128,6 +134,16 @@ async function fetchGithub() {
 
 const ITCH_PLATFORMS = { p_windows: 'Windows', p_linux: 'Linux', p_osx: 'macOS', p_android: 'Android' };
 
+// 平台信息可能是列表（文档示例）、对象（{ p_windows: true }）或旧版的 p_windows 等独立字段，三种都兼容
+function itchPlatforms(game) {
+    const traits = game.traits;
+    let keys = [];
+    if (Array.isArray(traits)) keys = traits;
+    else if (traits && typeof traits === 'object') keys = Object.keys(traits).filter((k) => traits[k]);
+    Object.keys(ITCH_PLATFORMS).forEach((k) => { if (game[k] && keys.indexOf(k) === -1) keys.push(k); });
+    return Object.keys(ITCH_PLATFORMS).filter((k) => keys.indexOf(k) !== -1).map((k) => ITCH_PLATFORMS[k]);
+}
+
 async function fetchItchApi(key) {
     const res = await fetch('https://api.itch.io/profile/games', {
         headers: { 'User-Agent': UA, Authorization: `Bearer ${key}` }
@@ -151,7 +167,7 @@ async function fetchItchApi(key) {
             cover: String(g.cover_url || '').replace(/^http:/, 'https:'),
             genre: genreById.get(String(g.id)) || '',
             web: g.type === 'html',
-            platforms: (g.traits || []).filter((t) => ITCH_PLATFORMS[t]).map((t) => ITCH_PLATFORMS[t])
+            platforms: itchPlatforms(g)
         }));
     // API 只返回自己上传或可编辑的游戏；之前从主页收录的合作游戏（API 里完全没有的）继续保留
     const known = new Set((json.games || []).map((g) => String(g.id)));
