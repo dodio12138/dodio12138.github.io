@@ -4,16 +4,6 @@
     align-items: flex-start;
 }
 
-/* 圆形头像：无边框，完整显示原图（不裁切放大） */
-.instagram-avatar {
-    width: 48px;
-    height: 48px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    object-fit: contain;
-    image-rendering: auto;
-}
-
 .instagram-header .app-header-text span {
     white-space: normal;
 }

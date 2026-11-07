@@ -5,7 +5,7 @@
 const INSTAGRAM_PROFILE = {
     username: 'dodio_12138',
     displayName: 'Levy',
-    avatar: asset('img/instagram/avatar-round.png'),
+    avatar: asset('img/instagram/avatar.jpg'),
     url: 'https://www.instagram.com/dodio_12138/',
     stats: {
         posts: 13,
@@ -112,9 +112,7 @@ function createInstagram() {
     follow.addEventListener('click', function () { openExternal(P.url); });
 
     function renderHeader() {
-        const avatar = createEl('img', 'instagram-avatar');
-        avatar.src = P.avatar;
-        avatar.alt = '';
+        const avatar = pixelAvatar(P.avatar, 48, 0.03);
         const text = createEl('div', 'app-header-text');
         text.appendChild(createEl('strong', '', P.displayName + ' (@' + P.username + ')'));
         P.bio.forEach(function (line) { text.appendChild(createEl('span', 'instagram-bio', line)); });

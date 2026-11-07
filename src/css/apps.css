@@ -24,15 +24,10 @@
     padding: 6px 8px;
 }
 
-/* 头像统一为圆形、无边框，完整显示原图（不放大）；clip-path 略小于半径，
-   去掉头像图片自带的黑色圆边 */
-.app-header-avatar {
-    width: 32px;
-    height: 32px;
+/* 像素风圆形头像（main.js 的 pixelAvatar 按 1:1 绘制） */
+.pixel-avatar {
     flex-shrink: 0;
-    object-fit: contain;
-    clip-path: circle(46% at 50% 50%);
-    image-rendering: auto;
+    image-rendering: pixelated;
 }
 
 .app-header-text {

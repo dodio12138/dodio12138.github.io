@@ -221,9 +221,7 @@ function createGithub(initialUrl) {
         .then(function (data) {
             repos = data.items;
             profile = data.profile;
-            const avatar = createEl('img', 'app-header-avatar');
-            avatar.src = profile.avatar + (profile.avatar.indexOf('?') === -1 ? '?' : '&') + 's=64';
-            avatar.alt = '';
+            const avatar = pixelAvatar(profile.avatar + (profile.avatar.indexOf('?') === -1 ? '?' : '&') + 's=64', 32, 0.03);
             const text = createEl('div', 'app-header-text');
             text.append(
                 createEl('strong', '', profile.name + ' (@' + profile.login + ')'),

@@ -26,6 +26,64 @@ function createEl(tag, className, text) {
     return node;
 }
 
+// 像素风圆形头像：按显示尺寸 1:1 画在 canvas 上，硬边圆（无抗锯齿）+ 1px 灰黑描边，与图标风格一致。
+// inset：先裁掉原图外圈的比例（头像图片自带黑色圆边时用），不放大照片本身。
+const AVATAR_OUTLINE = '#404040';
+
+function pixelAvatar(src, size, inset) {
+    const canvas = createEl('canvas', 'pixel-avatar');
+    canvas.width = size;
+    canvas.height = size;
+    canvas.setAttribute('role', 'img');
+    canvas.setAttribute('aria-label', 'Avatar');
+    const ctx = canvas.getContext('2d');
+    const r = size / 2;
+
+    // 第 y 行在半径 rad 的圆内的像素范围
+    function span(y, rad) {
+        const dy = y + 0.5 - r;
+        if (Math.abs(dy) > rad) return null;
+        const half = Math.sqrt(rad * rad - dy * dy);
+        const x0 = Math.ceil(r - half - 0.5);
+        const x1 = Math.floor(r + half - 0.5);
+        return x1 >= x0 ? [x0, x1] : null;
+    }
+
+    function inside(x, y, rad) {
+        const s = span(y, rad);
+        return !!s && x >= s[0] && x <= s[1];
+    }
+
+    const img = new Image();
+    img.onload = function () {
+        const cut = (inset || 0) * Math.min(img.naturalWidth, img.naturalHeight);
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(img, cut, cut, img.naturalWidth - cut * 2, img.naturalHeight - cut * 2, 0, 0, size, size);
+
+        // 只保留内圈（硬边：由整像素的矩形拼成，不产生抗锯齿）。
+        // destination-in 每次绘制都会清掉绘制区域以外的内容，所以必须把所有行合成一条路径一次填充
+        ctx.globalCompositeOperation = 'destination-in';
+        ctx.fillStyle = '#000';
+        ctx.beginPath();
+        for (let y = 0; y < size; y++) {
+            const s = span(y, r - 1);
+            if (s) ctx.rect(s[0], y, s[1] - s[0] + 1, 1);
+        }
+        ctx.fill();
+
+        // 外圈 1px 描边：在外圆内、但不在内圆内的像素
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.fillStyle = AVATAR_OUTLINE;
+        for (let y = 0; y < size; y++) {
+            for (let x = 0; x < size; x++) {
+                if (inside(x, y, r) && !inside(x, y, r - 1)) ctx.fillRect(x, y, 1, 1);
+            }
+        }
+    };
+    img.src = src;
+    return canvas;
+}
+
 function escapeHtml(value) {
     return String(value)
         .replace(/&/g, '&amp;')
