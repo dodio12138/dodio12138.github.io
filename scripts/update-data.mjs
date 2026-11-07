@@ -1,6 +1,6 @@
 // 自动更新桌面应用的数据：GitHub 仓库、itch.io 游戏、Bilibili 视频、Instagram 照片，并把新的 GitHub Pages 项目补进 sitemap.xml。
 //
-// 用法：node scripts/update-data.mjs        （需要 Node 20+，无第三方依赖）
+// 用法：node scripts/update-data.mjs        （需要 Node 20+，工作流里用 Node 24；无第三方依赖）
 // 由 .github/workflows/update-data.yml 每天自动运行；也可以在 Actions 页面手动运行。
 //
 // 规则：
