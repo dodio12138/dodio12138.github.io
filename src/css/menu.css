@@ -106,7 +106,7 @@
     z-index: var(--z-overlay);
     max-width: 320px;
     padding: 1px 4px;
-    background: #ffffe1;
+    background: var(--InfoWindow);
     border: 1px solid var(--ButtonDkShadow);
     color: var(--ButtonText);
     font-size: 13px;

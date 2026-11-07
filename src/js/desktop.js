@@ -74,7 +74,7 @@
     let marquee = null;
 
     desktop.addEventListener('mousedown', function (event) {
-        if (event.button !== 0 || event.target.closest('.app')) return;
+        if (event.button !== 0 || event.target.closest('.app, .desk-bunny')) return;
         event.preventDefault();
         document.activeElement && document.activeElement.blur && document.activeElement.blur();
         const additive = event.ctrlKey || event.metaKey;

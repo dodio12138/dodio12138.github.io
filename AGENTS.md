@@ -13,6 +13,7 @@ The home page (`index.html`) is a Windows 95-style desktop built from these laye
 | Popup menus, menu bars, right-click menus | `menu.css` | `menu.js` |
 | Window manager: create/focus/min/max/close, drag, snap, window/taskbar menus, dialogs | `windows.css` | `window.js` |
 | Desktop icons: selection, rubber-band select, right-click, Arrange Icons, Properties | `index.css` | `desktop.js` |
+| Desktop pet: Godzilla the lionhead bunny peeking up in the bottom-right corner (sprite `res/img/desk-bunny.png`, made from her photo) | `index.css` | `deskbunny.js` |
 | Apps that open inside windows | `instagram.css`, `browser.css`, `apps.css` | `projects.js`, `notepad.js`, `meterminal.js`, `instagram.js`, `browser.js`, `github.js`, `itch.js`, `bilibili.js` |
 | Start menu | `startmenu.css` | `startmenu.js` |
 | Taskbar clock and Date/Time Properties | `apps.css` | `clock.js` |

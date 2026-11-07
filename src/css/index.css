@@ -3,6 +3,7 @@
 /* ---------- 桌面 ---------- */
 
 #DeskBackground {
+    position: relative;
     width: 100%;
     height: calc(100vh - var(--taskbar-height));
     display: flex;
@@ -15,8 +16,11 @@
     color: var(--DesktopText);
 }
 
-/* 两组图标：左侧系统 / 站内，右侧各平台应用；空间不够时自动换列 */
+/* 两组图标：左侧系统 / 站内，右侧各平台应用；空间不够时自动换列。
+   两组各占一半宽度：grid 会按“每列一个图标”估算自身宽度，不限制时两组加起来比屏幕宽，右组被挤出屏幕 */
 .desktop-icons {
+    flex: 1 1 0;
+    min-width: 0;
     height: 100%;
     display: grid;
     grid-auto-flow: column;
@@ -212,4 +216,82 @@
 #taskbar-time {
     min-width: 52px;
     text-align: center;
+}
+
+/* ---------- 桌面宠物：右下角从任务栏后探出半身的兔子 Godzilla（deskbunny.js） ---------- */
+/* 精灵图由她的照片抠图生成：Win98 216 色 + 4x4 Bayer 抖动，每帧 80×94，按 1:1 显示 */
+
+.desk-bunny {
+    position: absolute;
+    right: 24px;
+    bottom: -8px;              /* 下沿藏在任务栏后，探头/缩回时不会露出底边 */
+    width: 80px;
+    height: 94px;
+    padding: 0;
+    background: none;
+}
+
+.desk-bunny:focus-visible {
+    outline: 1px dotted var(--DesktopText);
+}
+
+.desk-bunny-sprite {
+    display: block;
+    width: 80px;
+    height: 94px;
+    background: url('../../res/img/desk-bunny.png') no-repeat 0 0;
+    transition: transform 120ms steps(2);
+}
+
+.desk-bunny-sprite[data-frame="blink"] { background-position: -80px 0; }
+.desk-bunny-sprite[data-frame="nose"] { background-position: -160px 0; }
+.desk-bunny-sprite[data-frame="alert"] { background-position: -240px 0; transform: translateY(-6px); }
+.desk-bunny-sprite[data-frame="happy"] { background-position: -320px 0; transform: translateY(-6px); }
+.desk-bunny-sprite[data-frame="twitch"] { background-position: -400px 0; }
+/* 缩回：闭眼往下躲一下 */
+.desk-bunny-sprite[data-frame="duck"] { background-position: -80px 0; transform: translateY(6px); }
+
+/* 说话气泡：沿用 Win98 提示框的颜色，尾巴指向兔子 */
+.desk-bunny-balloon {
+    position: absolute;
+    right: 16px;
+    bottom: 100px;
+    padding: 2px 6px;
+    background: var(--InfoWindow);
+    border: 1px solid var(--ButtonDkShadow);
+    color: var(--ButtonText);
+    font-size: 13px;
+    line-height: 16px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.desk-bunny-balloon[hidden] {
+    display: none;
+}
+
+.desk-bunny-balloon::after {
+    content: '';
+    position: absolute;
+    right: 24px;
+    bottom: -7px;
+    border: 6px solid transparent;
+    border-bottom: 0;
+    border-top-color: var(--ButtonDkShadow);
+}
+
+/* 爱心按整像素一步步往上飘（steps 保持像素清晰） */
+.desk-bunny-heart {
+    position: absolute;
+    top: 12px;
+    width: 9px;
+    height: 8px;
+    pointer-events: none;
+    animation: desk-bunny-heart 900ms steps(9) forwards;
+}
+
+@keyframes desk-bunny-heart {
+    from { transform: translateY(0); opacity: 1; }
+    80% { opacity: 1; }
+    to { transform: translateY(-27px); opacity: 0; }
 }
