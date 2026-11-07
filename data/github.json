@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-07T00:55:58.257Z",
+    "updated": "2026-11-07T02:40:17.911Z",
     "profile": {
         "login": "dodio12138",
         "name": "Levy",
@@ -11,6 +11,18 @@
         "publicRepos": 46
     },
     "items": [
+        {
+            "name": "dodio12138.github.io",
+            "description": "Windows98-style personal website",
+            "language": "JavaScript",
+            "stars": 0,
+            "forks": 0,
+            "topics": [],
+            "url": "https://github.com/dodio12138/dodio12138.github.io",
+            "homepage": "https://dodio12138.github.io/",
+            "pushed": "2026-11-07T02:40:02Z",
+            "created": "2023-04-03T18:37:34Z"
+        },
         {
             "name": "shift-pong",
             "description": "SHIFT PONG — pixel-art 3D table tennis with SHIFT skills. GitHub Game Off 2026 entry (Godot 4.7).",
@@ -143,18 +155,6 @@
             "homepage": "",
             "pushed": "2026-07-17T03:47:02Z",
             "created": "2026-07-15T22:31:49Z"
-        },
-        {
-            "name": "dodio12138.github.io",
-            "description": "Windows98-style personal website",
-            "language": "CSS",
-            "stars": 0,
-            "forks": 0,
-            "topics": [],
-            "url": "https://github.com/dodio12138/dodio12138.github.io",
-            "homepage": "https://dodio12138.github.io/",
-            "pushed": "2026-07-12T22:41:11Z",
-            "created": "2023-04-03T18:37:34Z"
         },
         {
             "name": "MergeCanvas",
