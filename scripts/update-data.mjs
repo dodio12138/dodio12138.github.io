@@ -7,6 +7,7 @@
 // - 只有内容变化时才重写 data/*.json（不会因为时间戳产生无意义的提交）
 // - 某个来源失败时保留它上一次的数据，其余来源照常更新
 // - sitemap.xml 只增不减
+// - itch.io 在 GitHub 服务器上需要环境变量 ITCH_API_KEY（见 scripts/ITCH_SETUP.md），本地可不设置
 // - Instagram 需要环境变量 INSTAGRAM_TOKEN（存放在 GitHub Secrets，设置方法见 scripts/INSTAGRAM_SETUP.md）；
 //   没有配置时跳过，窗口继续显示 instagram.js 里的内置照片
 
@@ -121,7 +122,49 @@ async function fetchGithub() {
     };
 }
 
-// ---------- itch.io（解析个人主页的游戏格子） ----------
+// ---------- itch.io ----------
+// 配置了 ITCH_API_KEY 时用官方 API（https://api.itch.io/profile/games），否则解析个人主页。
+// itch.io 会拦截来自 GitHub 服务器的主页请求，所以自动更新需要 API 密钥（见 scripts/ITCH_SETUP.md）。
+
+const ITCH_PLATFORMS = { p_windows: 'Windows', p_linux: 'Linux', p_osx: 'macOS', p_android: 'Android' };
+
+async function fetchItchApi(key) {
+    const res = await fetch('https://api.itch.io/profile/games', {
+        headers: { 'User-Agent': UA, Authorization: `Bearer ${key}` }
+    });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok || json.errors) {
+        const message = json.errors ? [].concat(json.errors).join('; ') : `HTTP ${res.status}`;
+        throw new Error(`api.itch.io/profile/games → ${message.split(key).join('***')}`);
+    }
+    // API 没有“类型”字段：沿用上一次数据里同一游戏的类型
+    const previous = readJson(path.join(DATA_DIR, 'itch.json'), { items: [] }).items || [];
+    const genreById = new Map(previous.map((g) => [String(g.id), g.genre]));
+    const games = (json.games || [])
+        .filter((g) => g.published)
+        .sort((a, b) => String(b.published_at).localeCompare(String(a.published_at)))
+        .map((g) => ({
+            id: String(g.id),
+            title: g.title,
+            url: String(g.url).replace(/^http:/, 'https:'),
+            text: g.short_text || '',
+            cover: String(g.cover_url || '').replace(/^http:/, 'https:'),
+            genre: genreById.get(String(g.id)) || '',
+            web: g.type === 'html',
+            platforms: (g.traits || []).filter((t) => ITCH_PLATFORMS[t]).map((t) => ITCH_PLATFORMS[t])
+        }));
+    // API 只返回自己上传或可编辑的游戏；之前从主页收录的合作游戏（API 里完全没有的）继续保留
+    const known = new Set((json.games || []).map((g) => String(g.id)));
+    const extra = previous.filter((g) => !known.has(String(g.id)));
+    return { profile: { url: `https://${ACCOUNTS.itch}.itch.io/` }, items: games.concat(extra) };
+}
+
+async function fetchItch() {
+    if (process.env.ITCH_API_KEY) return fetchItchApi(process.env.ITCH_API_KEY);
+    return fetchItchPage();
+}
+
+// 解析个人主页的游戏格子（本地运行时可用）
 
 function decodeEntities(text) {
     return text
@@ -129,7 +172,7 @@ function decodeEntities(text) {
         .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&#x27;/g, "'");
 }
 
-async function fetchItch() {
+async function fetchItchPage() {
     const url = `https://${ACCOUNTS.itch}.itch.io/`;
     const res = await fetch(url, { headers: { 'User-Agent': UA } });
     if (!res.ok) throw new Error(`${url} → HTTP ${res.status}`);

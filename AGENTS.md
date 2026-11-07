@@ -80,6 +80,7 @@ Keep everything plain HTML/CSS/JavaScript, dependency-free, with 4-space indenta
 - The script identifies itself honestly, makes one request per source per run, and keeps the previous data when a source refuses or fails. Never add tricks to get around a site's bot protection.
 - Play counts, stars and similar numbers alone only trigger a rewrite once a week; new videos, games or repositories are written immediately.
 - Apps read the files with `loadData(name)` from `main.js`. The Instagram window falls back to the built-in `INSTAGRAM_POSTS` when `data/instagram.json` does not exist.
+- itch.io blocks page requests from GitHub's runners, so the workflow needs the `ITCH_API_KEY` secret (official API `https://api.itch.io/profile/games`, setup: `scripts/ITCH_SETUP.md`); without it the script parses the profile page, which only works locally.
 - Secrets: `INSTAGRAM_TOKEN` (Instagram long-lived token, refreshed every run) and optional `GH_PAT` (fine-grained token with this repo's "Secrets: Read and write", used to save the refreshed token). Never print or commit tokens; all Instagram requests go through `instagramGet`, which strips the token from error messages.
 - GitHub disables scheduled workflows after 60 days without repository activity; re-enable it from the Actions tab if that happens.
 
