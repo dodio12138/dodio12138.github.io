@@ -80,6 +80,17 @@
     user-select: none;
 }
 
+/* 各窗口的列宽 */
+.projects-col-name { width: 30%; }
+.projects-col-description { width: 50%; }
+.projects-col-type { width: 20%; }
+
+.github-col-name { width: 30%; }
+.github-col-description { width: 34%; }
+.github-col-language { width: 14%; }
+.github-col-stars { width: 8%; }
+.github-col-pushed { width: 14%; }
+
 .listview th {
     position: sticky;
     top: -2px;

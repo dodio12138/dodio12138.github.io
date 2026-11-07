@@ -26,11 +26,11 @@ function createGithub(initialUrl) {
     content.classList.add('app-wincontent');
 
     const COLUMNS = [
-        { key: 'name', label: 'Name', width: '30%' },
-        { key: 'description', label: 'Description', width: '34%' },
-        { key: 'language', label: 'Language', width: '14%' },
-        { key: 'stars', label: '★', width: '8%', num: true },
-        { key: 'pushed', label: 'Updated', width: '14%' }
+        { key: 'name', label: 'Name' },
+        { key: 'description', label: 'Description' },
+        { key: 'language', label: 'Language' },
+        { key: 'stars', label: '★', num: true },
+        { key: 'pushed', label: 'Updated' }
     ];
 
     let repos = [];
@@ -139,9 +139,7 @@ function createGithub(initialUrl) {
         const colgroup = createEl('colgroup');
         const head = createEl('tr');
         COLUMNS.forEach(function (col) {
-            const c = createEl('col');
-            c.style.width = col.width;
-            colgroup.appendChild(c);
+            colgroup.appendChild(createEl('col', 'github-col-' + col.key));
             const th = createEl('th');
             const button = createEl('button', '', col.label);
             button.type = 'button';

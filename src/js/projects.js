@@ -130,12 +130,10 @@ function createProjects() {
         const table = createEl('table', 'listview');
         const colgroup = createEl('colgroup');
         const head = createEl('tr');
-        [['Name', '30%'], ['Description', '50%'], ['Type', '20%']].forEach(function (col) {
-            const c = createEl('col');
-            c.style.width = col[1];
-            colgroup.appendChild(c);
+        ['name', 'description', 'type'].forEach(function (key) {
+            colgroup.appendChild(createEl('col', 'projects-col-' + key));
             const th = createEl('th');
-            const button = createEl('button', '', col[0]);
+            const button = createEl('button', '', key.charAt(0).toUpperCase() + key.slice(1));
             button.type = 'button';
             th.appendChild(button);
             head.appendChild(th);
