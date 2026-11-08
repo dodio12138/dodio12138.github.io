@@ -1,9 +1,22 @@
 {
-    "updated": "2026-11-07T00:56:16.255Z",
+    "updated": "2026-11-08T03:24:09.185Z",
     "profile": {
         "url": "https://dodio12138.itch.io/"
     },
     "items": [
+        {
+            "id": "5313537",
+            "title": "Edit Duel / 剪辑决斗",
+            "url": "https://dodio12138.itch.io/edit-duel",
+            "text": "Edit 10 seconds. Render. Only one survives.",
+            "cover": "https://img.itch.zone/aW1nLzMxOTIxNTU1LnBuZw==/315x250%23c/ph0xoq.png",
+            "genre": "",
+            "web": true,
+            "platforms": [
+                "Windows",
+                "macOS"
+            ]
+        },
         {
             "id": "5312787",
             "title": "Let the Boss Win",
