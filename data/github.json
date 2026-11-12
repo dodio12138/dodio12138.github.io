@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-10T03:23:40.878Z",
+    "updated": "2026-11-12T03:24:31.651Z",
     "profile": {
         "login": "dodio12138",
         "name": "Levy",
@@ -8,9 +8,51 @@
         "url": "https://github.com/dodio12138",
         "followers": 7,
         "following": 35,
-        "publicRepos": 48
+        "publicRepos": 50
     },
     "items": [
+        {
+            "name": "military-unit-system",
+            "description": "简约兵牌与军事编制编辑器，支持分支折叠、预设管理和编制图导出",
+            "language": "JavaScript",
+            "stars": 0,
+            "forks": 0,
+            "topics": [],
+            "url": "https://github.com/dodio12138/military-unit-system",
+            "homepage": "https://dodio12138.github.io/military-unit-system/",
+            "pushed": "2026-11-11T16:49:08Z",
+            "created": "2026-11-11T07:39:46Z"
+        },
+        {
+            "name": "pixel-hud-ui",
+            "description": "像素 HUD 风格 UI 框架 + Claude 技能：设计规范、CSS 套件、配色与控件 / A retro game-HUD UI framework packaged as a Claude Skill",
+            "language": "CSS",
+            "stars": 0,
+            "forks": 0,
+            "topics": [
+                "claude-skill",
+                "css",
+                "design-system",
+                "pixel-art",
+                "ui-framework"
+            ],
+            "url": "https://github.com/dodio12138/pixel-hud-ui",
+            "homepage": "",
+            "pushed": "2026-11-11T07:48:46Z",
+            "created": "2026-11-11T07:48:38Z"
+        },
+        {
+            "name": "dodio12138.github.io",
+            "description": "Windows98-style personal website",
+            "language": "JavaScript",
+            "stars": 0,
+            "forks": 0,
+            "topics": [],
+            "url": "https://github.com/dodio12138/dodio12138.github.io",
+            "homepage": "https://dodio12138.github.io/",
+            "pushed": "2026-11-10T03:23:42Z",
+            "created": "2023-04-03T18:37:34Z"
+        },
         {
             "name": "penfall",
             "description": "落笔 Penfall — 单线写字机 Web 工作台：工作区、纸面排版、公式、单线中文字库、G-code 模拟与 GRBL 发送",
@@ -29,18 +71,6 @@
             "homepage": "",
             "pushed": "2026-11-09T14:46:31Z",
             "created": "2026-11-09T06:10:06Z"
-        },
-        {
-            "name": "dodio12138.github.io",
-            "description": "Windows98-style personal website",
-            "language": "JavaScript",
-            "stars": 0,
-            "forks": 0,
-            "topics": [],
-            "url": "https://github.com/dodio12138/dodio12138.github.io",
-            "homepage": "https://dodio12138.github.io/",
-            "pushed": "2026-11-08T03:24:10Z",
-            "created": "2023-04-03T18:37:34Z"
         },
         {
             "name": "dodio12138",
