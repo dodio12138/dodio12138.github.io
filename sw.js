@@ -1,5 +1,5 @@
 // 缓存空间名称：只有修改 CACHE_FILES 列表时才需要改版本号（替换图片不需要）
-const CACHE_VERSION = 'sw_v15';
+const CACHE_VERSION = 'sw_v16';
 //首页需预缓存的文件
 const CACHE_FILES = [
     '/',
@@ -29,8 +29,7 @@ const CACHE_FILES = [
     '/src/js/bilibili.js',
     '/src/js/startmenu.js',
     '/src/js/clock.js',
-    '/res/fonts/w95fa.woff',
-    '/res/fonts/fusion-pixel-zh.woff2'
+    '/res/fonts/w95fa.woff2'
 ];
 
 // 只处理本仓库的路径；同域名下的其他项目（/blog/、/fun-pages/、/MeTerminal/ 等）不拦截

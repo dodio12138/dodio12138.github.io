@@ -2,7 +2,8 @@
 
 @font-face {
     font-family: EffortsPro;
-    src: url('../../res/fonts/EffortsPro.woff') format('woff');
+    src: url('../../res/fonts/EffortsPro.woff2') format('woff2');
+    font-display: swap;
 }
 
 #mainCav {

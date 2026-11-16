@@ -4,8 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Levy's retro Windows 95 style desktop: projects, terminal, blog and photos.">
+    <meta name="description" content="Levy Zhang (dodio12138): indie game and web developer with an MSc in Advanced Robotics. A retro Windows 95 style desktop with projects, games, videos, blog and photos.">
+    <meta name="author" content="Levy Zhang">
+    <meta name="theme-color" content="#008080">
     <meta name="google-site-verification" content="HKBa6nygRazpup6hj2qCoD_GkK5QwVoO-rIbLxgJYp0" />
+    <link rel="canonical" href="https://dodio12138.github.io/">
+    <!-- 分享预览卡片（微信、Discord、X 等） -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Levy95">
+    <meta property="og:title" content="Levy Zhang">
+    <meta property="og:description" content="Indie Developer | Creative Worker. Game, Graphic, Map, Robot, Cybernetic.">
+    <meta property="og:url" content="https://dodio12138.github.io/">
+    <meta property="og:image" content="https://dodio12138.github.io/res/img/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Levy Zhang's profile card in a Windows 95 style window: Indie Developer, Creative Worker">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Levy Zhang",
+        "alternateName": "dodio12138",
+        "url": "https://dodio12138.github.io/",
+        "jobTitle": "Indie game and web developer",
+        "alumniOf": "Queen Mary University of London",
+        "sameAs": [
+            "https://github.com/dodio12138",
+            "https://dodio12138.itch.io/",
+            "https://space.bilibili.com/12027943",
+            "https://www.instagram.com/dodio_12138/"
+        ]
+    }
+    </script>
     <link rel="stylesheet" href="src/css/base.css">
     <link rel="stylesheet" href="src/css/index.css">
     <link rel="stylesheet" href="src/css/windows.css">
@@ -15,11 +46,30 @@
     <link rel="stylesheet" href="src/css/apps.css">
     <link rel="stylesheet" href="src/css/startmenu.css">
     <link rel="icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="res/img/apple-touch-icon.png">
     <link rel="manifest" href="manifest.json">
     <title>Levy</title>
 </head>
 
 <body>
+    <!-- 给搜索引擎和读屏软件的文字简介；桌面本身由 JS 生成，视觉上隐藏 -->
+    <header class="visually-hidden">
+        <h1>Levy Zhang (dodio12138)</h1>
+        <p>Indie game and web developer with an MSc in Advanced Robotics from Queen Mary University of London.
+            I make small games in Godot and Unity, dependency-free web tools, and videos about the things I build.</p>
+        <ul>
+            <li><a href="https://github.com/dodio12138">GitHub</a></li>
+            <li><a href="https://dodio12138.itch.io/">itch.io games</a></li>
+            <li><a href="https://space.bilibili.com/12027943">Bilibili videos</a></li>
+            <li><a href="https://www.instagram.com/dodio_12138/">Instagram</a></li>
+            <li><a href="https://dodio12138.github.io/blog/">Blog</a></li>
+            <li><a href="https://dodio12138.github.io/fun-pages/">FunPages</a></li>
+        </ul>
+    </header>
+    <noscript>
+        <p class="noscript-note">This desktop needs JavaScript.
+            Meanwhile, find me on <a href="https://github.com/dodio12138">GitHub</a>.</p>
+    </noscript>
     <!-- 桌面图标：左侧为系统和站内图标，右侧为各平台应用。data-action 调用 DesktopActions，<a> 打开链接（见 desktop.js） -->
     <div id="DeskBackground">
         <div class="desktop-icons">
@@ -202,21 +252,21 @@
         <small>Click anywhere to restart</small>
     </div>
 
-    <script src="src/js/main.js"></script>
-    <script src="src/js/menu.js"></script>
-    <script src="src/js/window.js"></script>
-    <script src="src/js/desktop.js"></script>
-    <script src="src/js/deskbunny.js"></script>
-    <script src="src/js/projects.js"></script>
-    <script src="src/js/notepad.js"></script>
-    <script src="src/js/meterminal.js"></script>
-    <script src="src/js/instagram.js"></script>
-    <script src="src/js/browser.js"></script>
-    <script src="src/js/github.js"></script>
-    <script src="src/js/itch.js"></script>
-    <script src="src/js/bilibili.js"></script>
-    <script src="src/js/startmenu.js"></script>
-    <script src="src/js/clock.js"></script>
+    <script src="src/js/main.js" defer></script>
+    <script src="src/js/menu.js" defer></script>
+    <script src="src/js/window.js" defer></script>
+    <script src="src/js/desktop.js" defer></script>
+    <script src="src/js/deskbunny.js" defer></script>
+    <script src="src/js/projects.js" defer></script>
+    <script src="src/js/notepad.js" defer></script>
+    <script src="src/js/meterminal.js" defer></script>
+    <script src="src/js/instagram.js" defer></script>
+    <script src="src/js/browser.js" defer></script>
+    <script src="src/js/github.js" defer></script>
+    <script src="src/js/itch.js" defer></script>
+    <script src="src/js/bilibili.js" defer></script>
+    <script src="src/js/startmenu.js" defer></script>
+    <script src="src/js/clock.js" defer></script>
 </body>
 
 </html>

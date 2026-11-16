@@ -1,6 +1,7 @@
 @font-face {
     font-family: FRANKGO;
-    src: url('../../res/fonts/FRANKGO.ttf');
+    src: url('../../res/fonts/FRANKGO.woff2') format('woff2');
+    font-display: swap;
 }
 
 :root {
@@ -62,7 +63,7 @@ body {
 }
 
 #career,
-#number {
+#e-mail {
     padding-top: 0.8vw;
 }
 

@@ -2,7 +2,7 @@
 
 (function () {
     const IMG = {
-        grass: '../../res/img/tall-grass-png-hd-photo-16.png',
+        grass: '../../res/img/tall-grass.png',
         eating: '../../res/img/tuEat.webp',
         idle: '../../res/img/tuStatic.png'
     };

@@ -1,2 +1,4 @@
 User-agent: *
-Disallow: /res/
+Allow: /
+
+Sitemap: https://dodio12138.github.io/sitemap.xml
