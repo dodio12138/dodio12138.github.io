@@ -25,6 +25,7 @@ const EMBEDDABLE_HOSTS = [location.hostname, 'dodio12138.github.io'];
 
 // 收藏夹：首页、Links 栏、Favorites 菜单共用
 const BROWSER_FAVORITES = [
+    { title: 'Lévy Flight Studio', url: 'https://levyflight.uk/', icon: icon16('levyflight'), desc: 'My game studio.' },
     { title: 'FunPages', url: 'https://dodio12138.github.io/fun-pages/', icon: icon16('web-files'), desc: 'Some interesting HTML stuffs.' },
     { title: "Dodio's Blog", url: 'https://dodio12138.github.io/blog/', icon: icon16('blog'), desc: 'Notes and articles.' },
     { title: 'MeTerminal', url: 'https://dodio12138.github.io/MeTerminal/src/MePC.html', icon: icon16('console'), desc: 'A web page that simulates terminal.' },
