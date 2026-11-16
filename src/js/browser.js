@@ -21,7 +21,7 @@ const BROWSER_ICONS = {
 
 // 允许在 iframe 里显示的站点。GitHub Pages 不禁止被嵌入；
 // 大部分其他网站（instagram.com、github.com 等）会拒绝，改为显示提示页
-const EMBEDDABLE_HOSTS = [location.hostname, 'dodio12138.github.io'];
+const EMBEDDABLE_HOSTS = [location.hostname, 'dodio12138.github.io', 'levyflight.uk'];
 
 // 收藏夹：首页、Links 栏、Favorites 菜单共用
 const BROWSER_FAVORITES = [
