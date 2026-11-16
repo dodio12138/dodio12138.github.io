@@ -6,6 +6,11 @@ Hi, I'm **Levy Zhang** ([@dodio12138](https://github.com/dodio12138)).
 Indie developer, creative worker, and a forever-learning
 full-stack developer. One rule: *do something interesting.*
 
+I publish my games as **LevyFlight Studio** (列维飞行工作室).
+The name comes from the *Lévy flight*: a random walk of many
+small steps and the occasional long jump - which is roughly
+how I pick projects.
+
 ---
 
 ## Robotics
@@ -102,6 +107,10 @@ Curious first, practical second, never quite done.
 
 独立开发者、创作者，一直在学着做全栈。
 唯一的原则：*做点有意思的事。*
+
+我的游戏以 **列维飞行工作室**（LevyFlight Studio）的名义发布。
+名字来自数学里的“列维飞行”：一种随机游走，大多是小步乱逛，
+偶尔来一次远距离跳跃，差不多就是我挑项目的方式。
 
 ---
 
