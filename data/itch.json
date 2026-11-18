@@ -1,9 +1,19 @@
 {
-    "updated": "2026-11-08T03:24:09.185Z",
+    "updated": "2026-11-18T03:24:46.318Z",
     "profile": {
         "url": "https://dodio12138.itch.io/"
     },
     "items": [
+        {
+            "id": "5391777",
+            "title": "Unit Symbol Editor",
+            "url": "https://dodio12138.itch.io/unit-symbol-editor",
+            "text": "Build military orders of battle with NATO-style unit symbols, right in your browser.",
+            "cover": "https://img.itch.zone/aW1nLzMyNDYxODAzLnBuZw==/315x250%23c/hjIWZ7.png",
+            "genre": "",
+            "web": true,
+            "platforms": []
+        },
         {
             "id": "5313537",
             "title": "Edit Duel / 剪辑决斗",
