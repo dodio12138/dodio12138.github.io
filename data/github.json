@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-12T03:24:31.651Z",
+    "updated": "2026-11-19T03:25:01.402Z",
     "profile": {
         "login": "dodio12138",
         "name": "Levy",
@@ -7,10 +7,22 @@
         "avatar": "https://avatars.githubusercontent.com/u/35823785?v=4",
         "url": "https://github.com/dodio12138",
         "followers": 7,
-        "following": 35,
+        "following": 36,
         "publicRepos": 50
     },
     "items": [
+        {
+            "name": "dodio12138.github.io",
+            "description": "Windows98-style personal website",
+            "language": "JavaScript",
+            "stars": 0,
+            "forks": 0,
+            "topics": [],
+            "url": "https://github.com/dodio12138/dodio12138.github.io",
+            "homepage": "https://dodio12138.github.io/",
+            "pushed": "2026-11-18T03:24:47Z",
+            "created": "2023-04-03T18:37:34Z"
+        },
         {
             "name": "military-unit-system",
             "description": "简约兵牌与军事编制编辑器，支持分支折叠、预设管理和编制图导出",
@@ -20,7 +32,7 @@
             "topics": [],
             "url": "https://github.com/dodio12138/military-unit-system",
             "homepage": "https://dodio12138.github.io/military-unit-system/",
-            "pushed": "2026-11-11T16:49:08Z",
+            "pushed": "2026-11-18T01:30:04Z",
             "created": "2026-11-11T07:39:46Z"
         },
         {
@@ -40,18 +52,6 @@
             "homepage": "",
             "pushed": "2026-11-11T07:48:46Z",
             "created": "2026-11-11T07:48:38Z"
-        },
-        {
-            "name": "dodio12138.github.io",
-            "description": "Windows98-style personal website",
-            "language": "JavaScript",
-            "stars": 0,
-            "forks": 0,
-            "topics": [],
-            "url": "https://github.com/dodio12138/dodio12138.github.io",
-            "homepage": "https://dodio12138.github.io/",
-            "pushed": "2026-11-10T03:23:42Z",
-            "created": "2023-04-03T18:37:34Z"
         },
         {
             "name": "penfall",
