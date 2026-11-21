@@ -155,7 +155,7 @@ function createNotepad(initialName) {
     let wordWrap = true;
     let lastFind = '';
     let preview = false;   // Markdown 预览（.md 文件默认打开）
-    let language = 'en';  // 多语言文档默认显示英文，用“翻译”按钮切换
+    let language = LANG;  // 多语言文档默认跟随界面语言（区域设置），用“翻译”按钮切换
 
     const text = createEl('textarea', 'notepad-text');
     text.spellcheck = false;

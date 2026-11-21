@@ -11,7 +11,7 @@ let menuOnClose = null;
 // '&File' → <u>F</u>ile
 function menuLabel(text) {
     const span = document.createElement('span');
-    const parts = String(text).split('&');
+    const parts = String(t(text)).split('&');
     span.append(parts[0]);
     parts.slice(1).forEach(function (part) {
         if (!part) return;

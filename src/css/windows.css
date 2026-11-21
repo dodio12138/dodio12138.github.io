@@ -452,3 +452,55 @@ window[data-maximized="true"] .size-grip {
     border: 0;
     transform: scale(0.5);
 }
+
+/* ---------- 下拉列表（区域设置的语言） ---------- */
+
+.combobox {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 22px;
+    padding: 2px;
+    background: var(--ButtonHilight);
+    box-shadow: var(--bevel-sunken);
+    text-align: left;
+    cursor: var(--cursor-default);
+}
+
+.combobox-text {
+    flex: 1;
+    min-width: 0;
+    padding: 0 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.combobox-drop {
+    display: grid;
+    place-items: center;
+    width: 16px;
+    height: 18px;
+    flex-shrink: 0;
+    background: var(--ButtonFace);
+    box-shadow: var(--bevel-raised);
+}
+
+.combobox-drop::after {
+    content: '';
+    border-style: solid;
+    border-width: 4px 4px 0 4px;
+    border-color: currentColor transparent transparent transparent;
+}
+
+.combobox:active .combobox-drop {
+    box-shadow: var(--bevel-pressed);
+}
+
+.regional-panel .dialog-header {
+    align-items: flex-start;
+}
+
+.regional-panel .dialog-header p {
+    line-height: 18px;
+}

@@ -9,6 +9,7 @@ The home page (`index.html`) is a Windows 95-style desktop built from these laye
 | Layer | CSS | JS |
 |---|---|---|
 | Design tokens, fonts, reset, shared bevels | `base.css` | — |
+| Interface language (English / 简体中文): `t()`, `ZH` dictionary, text-node translation | — | `i18n.js` |
 | Desktop shell: taskbar, clock, shared actions/helpers | `index.css` | `main.js` |
 | Popup menus, menu bars, right-click menus | `menu.css` | `menu.js` |
 | Window manager: create/focus/min/max/close, drag, snap, window/taskbar menus, dialogs | `windows.css` | `window.js` |
@@ -61,6 +62,7 @@ Keep everything plain HTML/CSS/JavaScript, dependency-free, with 4-space indenta
 - Register `document`/`window` level listeners once at load, never per window or per click; use event delegation for lists.
 - Put data into the DOM with `textContent` / `createElement`. Use `innerHTML` only for static templates, and pass any data through `escapeHtml()`.
 - Windows are always created with `createWindow(id, width, height, title, icon)` and appended with `openWindow(windowElement)`; app content goes into `.wincontent`. Change a title later with `setWindowTitle(windowElement, title)`.
+- **Interface language** lives in `i18n.js` (Start → Settings → Regional Settings; saved in the visitor's `localStorage`, applied after a reload). Write UI text in English; when you add a menu item, button, dialog or label, add its Chinese to `ZH` (menu labels keep the mnemonic as `文件(&F)`; strings with numbers or names go in `ZH_PATTERNS`). Content (project names, repo descriptions, Notepad text) is never translated; mark new content areas in `I18N_SKIP`.
 - Comments may be Chinese or English; keep them short and explain *why*.
 
 ### HTML rules

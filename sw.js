@@ -1,5 +1,5 @@
 // 缓存空间名称：只有修改 CACHE_FILES 列表时才需要改版本号（替换图片不需要）
-const CACHE_VERSION = 'sw_v17';
+const CACHE_VERSION = 'sw_v18';
 //首页需预缓存的文件
 const CACHE_FILES = [
     '/',
@@ -14,6 +14,7 @@ const CACHE_FILES = [
     '/src/css/browser.css',
     '/src/css/apps.css',
     '/src/css/startmenu.css',
+    '/src/js/i18n.js',
     '/src/js/main.js',
     '/src/js/menu.js',
     '/src/js/window.js',

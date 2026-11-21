@@ -7,6 +7,13 @@
     const projectsMenu = document.getElementById('start-projects');
     if (!startButton || !menu) return;
 
+    // 静态写在 index.html 里的菜单名（<u>P</u>rograms）改用 menuLabel 生成，以便跟随界面语言
+    menu.querySelectorAll('.start-menu-item > .label').forEach(function (label) {
+        if (!label.querySelector('u')) return;
+        const raw = label.innerHTML.replace(/<u>(.)<\/u>/g, '&$1').replace(/&amp;/g, '&');
+        label.replaceChildren(menuLabel(raw));
+    });
+
     DesktopActions.shutdown = function () {
         shutdownScreen.classList.add('show');
     };

@@ -305,6 +305,70 @@
     // 开始菜单 Settings → Display Properties
     DesktopActions.display = displayProperties;
 
+    // ---------- 区域设置：界面语言（i18n.js） ----------
+    // 和 Win98 一样，改了之后要“重新启动”：确认后刷新页面，按新语言重新生成界面
+    function regionalSettings() {
+        let choice = LANG;
+        const win = createWindow('regionalwin', 360, 215, 'Regional Settings Properties', icon16('globe'), { resizable: false });
+        const content = win.querySelector('.wincontent');
+        content.classList.add('dialog-wincontent');
+
+        const header = createEl('div', 'dialog-header');
+        const globe = createEl('img');
+        globe.src = icon32('globe');
+        globe.alt = '';
+        header.append(globe, createEl('p', '', 'Many programs support international settings for numbers, currencies, times, and dates. Choose the language Levy95 uses for menus and dialogs.'));
+
+        const label = createEl('p', 'dialog-label');
+        label.appendChild(menuLabel('&Language'));
+        const combo = createEl('button', 'combobox');
+        combo.type = 'button';
+        const comboText = createEl('span', 'combobox-text');
+        combo.append(comboText, createEl('span', 'combobox-drop'));
+
+        function update() {
+            comboText.textContent = LANGUAGES.find(function (lang) { return lang.value === choice; }).name;
+        }
+
+        combo.addEventListener('mousedown', function (event) {
+            event.preventDefault();
+            if (isMenuOpen()) { closePopupMenu(); return; }
+            const rect = combo.getBoundingClientRect();
+            openPopupMenu(LANGUAGES.map(function (lang) {
+                return { label: lang.name, checked: lang.value === choice, radio: true, action: function () { choice = lang.value; update(); } };
+            }), rect.left, rect.bottom, { owner: combo, className: 'listbox', width: rect.width });
+        });
+
+        function apply(close) {
+            if (choice === LANG) {
+                if (close) closeWindow(win);
+                return;
+            }
+            saveLanguage(choice);
+            if (close) closeWindow(win);
+            messageBox({
+                title: 'System Settings Change',
+                icon: 'info',
+                message: 'You must restart your computer before the new settings will take effect.\n\nDo you want to restart your computer now?',
+                buttons: ['Yes', 'No']
+            }).then(function (answer) {
+                if (answer === 'Yes') location.reload();
+            });
+        }
+
+        const panel = createEl('div', 'dialog-panel regional-panel');
+        panel.append(header, createEl('div', 'dialog-rule'), label, combo);
+        content.append(panel, dialogButtons([
+            { label: 'OK', primary: true, action: function () { apply(true); } },
+            { label: 'Cancel', action: function () { closeWindow(win); } },
+            { label: 'Apply', action: function () { apply(false); } }
+        ]));
+        update();
+        openWindow(win);
+    }
+
+    DesktopActions.regional = regionalSettings;
+
     // 启动时恢复上次选的桌面颜色
     const savedColor = readColor();
     if (savedColor) applyColor(savedColor);
