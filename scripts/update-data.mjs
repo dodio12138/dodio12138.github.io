@@ -155,7 +155,7 @@ async function fetchItchApi(key, account = ACCOUNTS.itch) {
         const message = json.errors ? [].concat(json.errors).join('; ') : `HTTP ${res.status}`;
         throw new Error(`api.itch.io/profile/games → ${message.split(key).join('***')}`);
     }
-    // API 没有“类型”字段：沿用上一次数据里同一游戏的类型
+    // API 没有“类型”（genre）字段：沿用上一次数据里同一游戏的类型
     const previous = (readJson(path.join(DATA_DIR, 'itch.json'), { items: [] }).items || [])
         .filter((g) => (account === ACCOUNTS.itchStudio) === Boolean(g.studio));
     const genreById = new Map(previous.map((g) => [String(g.id), g.genre]));
@@ -169,6 +169,8 @@ async function fetchItchApi(key, account = ACCOUNTS.itch) {
             text: g.short_text || '',
             cover: String(g.cover_url || '').replace(/^http:/, 'https:'),
             genre: genreById.get(String(g.id)) || '',
+            // itch.io 的分类：game / tool / assets 等；开始菜单的 Games 和 Tools 按它分组
+            kind: g.classification || '',
             web: g.type === 'html',
             platforms: itchPlatforms(g)
         }));
@@ -197,6 +199,10 @@ async function fetchItch() {
         own.items = (previous.items || []).filter((g) => g.studio).concat(own.items);
         if (previous.studio) own.studio = previous.studio;
     }
+    // 主页解析拿不到分类：沿用上一次数据里同一游戏的分类
+    const kindById = new Map((readJson(path.join(DATA_DIR, 'itch.json'), { items: [] }).items || [])
+        .map((g) => [String(g.id), g.kind]));
+    own.items.forEach((g) => { if (!g.kind) g.kind = kindById.get(String(g.id)) || ''; });
     return own;
 }
 

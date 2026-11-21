@@ -86,43 +86,73 @@
         shutdownScreen.classList.remove('show');
     });
 
+    // 子菜单里的一项：data-href 打开链接，data-action 调用 DesktopActions（点击时由 runDesktopItem 处理）
+    function submenuItem(label, iconSrc, options) {
+        const item = createEl('li', 'start-menu-item');
+        item.setAttribute('role', 'menuitem');
+        if (options.href) item.dataset.href = options.href;
+        if (options.action) item.dataset.action = options.action;
+        if (options.title) item.title = options.title;
+        const icon = createEl('img');
+        icon.src = iconSrc;
+        icon.alt = '';
+        item.append(icon, createEl('span', 'label', label));
+        return item;
+    }
+
+    function separator() {
+        const line = createEl('li', 'start-menu-separator');
+        line.setAttribute('role', 'separator');
+        return line;
+    }
+
+    function showMessage(list, text) {
+        list.replaceChildren(createEl('li', 'start-menu-empty', text));
+    }
+
     // My Projects 子菜单：项目列表 + 打开文件夹（与 My Projects 窗口共用 loadProjects()）
     loadProjects()
         .then(function (projects) {
             projectsMenu.replaceChildren();
             projects.forEach(function (project) {
-                const item = document.createElement('li');
-                item.className = 'start-menu-item';
-                item.setAttribute('role', 'menuitem');
-                item.dataset.href = project.url;
-                item.title = project.description;
-                const icon = document.createElement('img');
-                icon.src = projectIcon(project, 16);
-                icon.alt = '';
-                const label = document.createElement('span');
-                label.className = 'label';
-                label.textContent = project.name;
-                item.append(icon, label);
-                projectsMenu.appendChild(item);
+                projectsMenu.appendChild(submenuItem(project.name, projectIcon(project, 16), {
+                    href: project.url,
+                    title: project.description
+                }));
             });
-            const separator = document.createElement('li');
-            separator.className = 'start-menu-separator';
-            separator.setAttribute('role', 'separator');
-            const open = document.createElement('li');
-            open.className = 'start-menu-item';
-            open.setAttribute('role', 'menuitem');
-            open.dataset.action = 'projects';
-            const icon = document.createElement('img');
-            icon.src = icon16('folder');
-            icon.alt = '';
-            const label = document.createElement('span');
-            label.className = 'label';
-            label.textContent = 'Open My Projects Folder';
-            open.append(icon, label);
-            projectsMenu.append(separator, open);
+            projectsMenu.append(separator(), submenuItem('Open My Projects Folder', icon16('folder'), { action: 'projects' }));
         })
         .catch(function (error) {
-            projectsMenu.querySelector('.start-menu-empty').textContent = '(Unavailable)';
+            showMessage(projectsMenu, '(Unavailable)');
             console.error('Error loading projects:', error);
         });
+
+    // Games / Tools 子菜单：itch.io 上的作品按 itch.io 的分类分组；
+    // 分类未知的（旧数据）先算作游戏。最后一项打开 itch.io 窗口看全部作品。
+    const gamesMenu = document.getElementById('start-games');
+    const toolsMenu = document.getElementById('start-tools');
+    if (gamesMenu && toolsMenu) {
+        loadData('itch')
+            .then(function (data) {
+                const items = data.items || [];
+                const fill = function (list, entries) {
+                    list.replaceChildren();
+                    if (!entries.length) {
+                        list.appendChild(createEl('li', 'start-menu-empty', '(Empty)'));
+                    }
+                    entries.forEach(function (game) {
+                        const label = game.studio ? game.title + ' (' + game.studio + ')' : game.title;
+                        list.appendChild(submenuItem(label, icon16('itch'), { href: game.url, title: game.text }));
+                    });
+                    list.append(separator(), submenuItem('All on itch.io', icon16('itch'), { action: 'itch' }));
+                };
+                fill(gamesMenu, items.filter(function (game) { return game.kind !== 'tool'; }));
+                fill(toolsMenu, items.filter(function (game) { return game.kind === 'tool'; }));
+            })
+            .catch(function (error) {
+                showMessage(gamesMenu, '(Unavailable)');
+                showMessage(toolsMenu, '(Unavailable)');
+                console.error('Error loading itch.io data:', error);
+            });
+    }
 })();
