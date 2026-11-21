@@ -234,7 +234,9 @@ const DesktopActions = {
     notepad: function () { notepadwin(); },
     aboutme: function () { notepadwin('AboutMe.md'); },
     meterminal: function () { meterminalwin(); },
-    instagram: function () { instagramwin(); }
+    instagram: function () { instagramwin(); },
+    mypc: function () { mypcwin(); },
+    recyclebin: function () { recyclebinwin(); }
 };
 
 // 执行带 data-action 或 href / data-href 的元素

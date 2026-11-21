@@ -628,3 +628,184 @@
     width: 16px;
     height: 16px;
 }
+
+/* ---------- 系统属性（Levy's PC） ---------- */
+
+.mypc-general {
+    display: flex;
+    gap: 20px;
+    padding: 16px 12px 8px;
+}
+
+.mypc-art {
+    width: 96px;
+    height: 96px;
+    flex-shrink: 0;
+    margin-top: 8px;
+}
+
+.mypc-facts {
+    flex: 1;
+    min-width: 0;
+}
+
+.mypc-section {
+    margin-bottom: 14px;
+}
+
+.mypc-heading {
+    margin-bottom: 2px;
+}
+
+.mypc-line {
+    padding-left: 18px;
+    line-height: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mypc-devices,
+.mypc-performance {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 100%;
+    padding: 4px;
+}
+
+.mypc-viewby {
+    display: flex;
+    gap: 16px;
+}
+
+/* 设备树：凹陷白框，点线连接，+/- 方框 */
+.mypc-tree {
+    flex: 1;
+    min-height: 0;
+    padding: 4px;
+    overflow: auto;
+    white-space: nowrap;
+    list-style: none;
+    user-select: none;
+}
+
+.mypc-tree ul {
+    list-style: none;
+    margin-left: 8px;
+    padding-left: 12px;
+    border-left: 1px dotted var(--GrayText);
+}
+
+.mypc-node:not(.open) > ul {
+    display: none;
+}
+
+.mypc-row,
+.mypc-leaf {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 18px;
+}
+
+.mypc-leaf::before {
+    content: "";
+    width: 9px;
+    border-top: 1px dotted var(--GrayText);
+}
+
+.mypc-row img {
+    width: 16px;
+    height: 16px;
+}
+
+.mypc-toggle {
+    position: relative;
+    width: 9px;
+    height: 9px;
+    flex-shrink: 0;
+    background: var(--ButtonHilight);
+    box-shadow: inset 0 0 0 1px var(--GrayText);
+}
+
+/* 方框里的横线（-）；收起时再加一条竖线（+） */
+.mypc-toggle::before,
+.mypc-toggle::after {
+    content: "";
+    position: absolute;
+    background: var(--ButtonText);
+}
+
+.mypc-toggle::before {
+    top: 4px;
+    left: 2px;
+    width: 5px;
+    height: 1px;
+}
+
+.mypc-node:not(.open) > .mypc-row .mypc-toggle::after {
+    top: 2px;
+    left: 4px;
+    width: 1px;
+    height: 5px;
+}
+
+.mypc-label {
+    padding: 0 2px;
+}
+
+.mypc-tree .selected > .mypc-label,
+.mypc-tree .mypc-leaf.selected .mypc-label {
+    background: var(--Highlight);
+    color: var(--HighlightText);
+}
+
+.mypc-tree.refreshing {
+    visibility: hidden;
+}
+
+.mypc-device-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.mypc-perf-table {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 6px 16px;
+    margin: 4px 4px 12px;
+}
+
+.mypc-perf-note {
+    margin: 0 4px 4px;
+}
+
+/* ---------- 回收站 ---------- */
+
+.recycle-col-name { width: 31%; }
+.recycle-col-from { width: 23%; }
+.recycle-col-deleted { width: 15%; }
+.recycle-col-type { width: 19%; }
+.recycle-col-size { width: 12%; }
+
+.recycle-status-size {
+    min-width: 80px;
+}
+
+/* 选项卡页隐藏时（上面的 display 会盖过 [hidden]） */
+.mypc-general[hidden],
+.mypc-devices[hidden],
+.mypc-performance[hidden] {
+    display: none;
+}
+
+/* 单选框：圆形凹陷，选中时中间一个黑点 */
+.mypc-viewby input[type="radio"] {
+    border-radius: 50%;
+}
+
+.mypc-viewby input[type="radio"]:checked {
+    background-image: radial-gradient(circle, var(--ButtonText) 0 2px, transparent 2.5px);
+}
