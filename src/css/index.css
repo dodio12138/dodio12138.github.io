@@ -69,6 +69,23 @@
     height: 32px;
 }
 
+/* 网页链接的图标（<a>）：左下角叠一个 98 的快捷方式小箭头（11px 原尺寸图） */
+a.app {
+    position: relative;
+}
+
+a.app::before {
+    content: "";
+    position: absolute;
+    top: 21px;
+    left: calc(50% - 16px);
+    width: 11px;
+    height: 11px;
+    background: url('../../res/icon/ui/shortcut-arrow.png') no-repeat;
+    image-rendering: pixelated;
+    pointer-events: none;
+}
+
 .app-title {
     padding: 0 2px;
 }
