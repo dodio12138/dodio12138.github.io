@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-19T03:25:01.402Z",
+    "updated": "2026-11-21T02:24:15.067Z",
     "profile": {
         "login": "dodio12138",
         "name": "Levy",
@@ -8,7 +8,7 @@
         "url": "https://github.com/dodio12138",
         "followers": 7,
         "following": 36,
-        "publicRepos": 50
+        "publicRepos": 51
     },
     "items": [
         {
@@ -20,8 +20,32 @@
             "topics": [],
             "url": "https://github.com/dodio12138/dodio12138.github.io",
             "homepage": "https://dodio12138.github.io/",
-            "pushed": "2026-11-18T03:24:47Z",
+            "pushed": "2026-11-21T02:24:04Z",
             "created": "2023-04-03T18:37:34Z"
+        },
+        {
+            "name": "blog",
+            "description": "",
+            "language": "HTML",
+            "stars": 0,
+            "forks": 0,
+            "topics": [],
+            "url": "https://github.com/dodio12138/blog",
+            "homepage": "https://dodio12138.github.io/blog/",
+            "pushed": "2026-11-21T02:23:54Z",
+            "created": "2023-12-19T21:29:37Z"
+        },
+        {
+            "name": "agent-ensemble",
+            "description": "Local multi-agent band with an authoritative MIDI timeline",
+            "language": "Python",
+            "stars": 0,
+            "forks": 0,
+            "topics": [],
+            "url": "https://github.com/dodio12138/agent-ensemble",
+            "homepage": "",
+            "pushed": "2026-11-21T02:21:05Z",
+            "created": "2026-11-21T00:51:31Z"
         },
         {
             "name": "military-unit-system",
@@ -401,18 +425,6 @@
             "homepage": "",
             "pushed": "2024-08-26T21:13:19Z",
             "created": "2024-08-21T12:43:10Z"
-        },
-        {
-            "name": "blog",
-            "description": "",
-            "language": "",
-            "stars": 0,
-            "forks": 0,
-            "topics": [],
-            "url": "https://github.com/dodio12138/blog",
-            "homepage": "https://dodio12138.github.io/blog/",
-            "pushed": "2024-05-11T19:16:54Z",
-            "created": "2023-12-19T21:29:37Z"
         },
         {
             "name": "MeTerminal",

@@ -1,9 +1,24 @@
 {
-    "updated": "2026-11-18T03:24:46.318Z",
+    "updated": "2026-11-21T02:24:16.000Z",
     "profile": {
         "url": "https://dodio12138.itch.io/"
     },
     "items": [
+        {
+            "id": "5411217",
+            "title": "Cloud Generator",
+            "url": "https://dodio12138.itch.io/cloud-generator",
+            "text": "Physically based pixel-art skies: living clouds, sunsets and god rays. Export PNG, GIF and video.",
+            "cover": "https://img.itch.zone/aW1nLzMyNTk1MTMyLnBuZw==/315x250%23c/Tt5UZt.png",
+            "genre": "",
+            "kind": "tool",
+            "web": true,
+            "platforms": [
+                "Windows",
+                "Linux",
+                "macOS"
+            ]
+        },
         {
             "id": "5391777",
             "title": "Unit Symbol Editor",
@@ -11,6 +26,7 @@
             "text": "Build military orders of battle with NATO-style unit symbols, right in your browser.",
             "cover": "https://img.itch.zone/aW1nLzMyNDYxODAzLnBuZw==/315x250%23c/hjIWZ7.png",
             "genre": "",
+            "kind": "tool",
             "web": true,
             "platforms": []
         },
@@ -21,6 +37,7 @@
             "text": "Edit 10 seconds. Render. Only one survives.",
             "cover": "https://img.itch.zone/aW1nLzMxOTIxNTU1LnBuZw==/315x250%23c/ph0xoq.png",
             "genre": "",
+            "kind": "game",
             "web": true,
             "platforms": [
                 "Windows",
@@ -34,6 +51,7 @@
             "text": "Freeze time. Rig the shot. Keep the boss happy.",
             "cover": "https://img.itch.zone/aW1nLzMxOTE2MjAyLnBuZw==/315x250%23c/B40u1D.png",
             "genre": "Puzzle",
+            "kind": "game",
             "web": true,
             "platforms": [
                 "Windows",
@@ -48,6 +66,7 @@
             "text": "A hand-drawn floor-plan puzzle about clients who always go with the first version.",
             "cover": "https://img.itch.zone/aW1nLzMxMzU3OTU4LnBuZw==/315x250%23c/%2FV9ZFi.png",
             "genre": "Puzzle",
+            "kind": "game",
             "web": true,
             "platforms": []
         },
@@ -58,6 +77,7 @@
             "text": "汉末三国终端风格大战略：选剧本、择势力，在实时推演中逐鹿天下。",
             "cover": "https://img.itch.zone/aW1nLzMxMTAxMjc2LnBuZw==/315x250%23c/TquiwM.png",
             "genre": "Strategy",
+            "kind": "game",
             "web": true,
             "platforms": []
         },
@@ -68,6 +88,7 @@
             "text": "A resume system for web simulation terminals",
             "cover": "https://img.itch.zone/aW1nLzEzMTIyNzkwLmpwZw==/315x250%23c/LH2T%2F4.jpg",
             "genre": "",
+            "kind": "tool",
             "web": true,
             "platforms": []
         },
@@ -78,6 +99,7 @@
             "text": "Infinite Rebirth",
             "cover": "https://img.itch.zone/aW1nLzEyNTY3NDg5LnBuZw==/315x250%23c/UJkQ4w.png",
             "genre": "Platformer",
+            "kind": "game",
             "web": true,
             "platforms": [
                 "Windows"
@@ -90,6 +112,7 @@
             "text": "Everything Play",
             "cover": "https://img.itch.zone/aW1nLzEyMTQ1ODM0LnBuZw==/315x250%23c/ErRmam.png",
             "genre": "",
+            "kind": "tool",
             "web": false,
             "platforms": [
                 "Windows"
@@ -102,6 +125,7 @@
             "text": "Turn all files into BMP images!",
             "cover": "https://img.itch.zone/aW1nLzExOTU5Mjc5LnBuZw==/315x250%23c/u%2F1smJ.png",
             "genre": "",
+            "kind": "tool",
             "web": false,
             "platforms": [
                 "Windows"
@@ -115,7 +139,8 @@
             "cover": "https://img.itch.zone/aW1nLzExODQ0NzMyLmpwZw==/315x250%23c/0tO9%2F1.jpg",
             "genre": "",
             "web": true,
-            "platforms": []
+            "platforms": [],
+            "kind": ""
         }
     ]
 }
