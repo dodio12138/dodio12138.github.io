@@ -20,8 +20,12 @@ const BROWSER_ICONS = {
 };
 
 // 允许在 iframe 里显示的站点。GitHub Pages 不禁止被嵌入；
-// 大部分其他网站（instagram.com、github.com 等）会拒绝，改为显示提示页
+// 大部分其他网站（instagram.com、github.com 等）会拒绝，改为显示提示页。
+// itch.io 也禁止被嵌入（frame-ancestors 只允许 itch.io 自己），作品页改用内置的作品页面（itchGamePage）
 const EMBEDDABLE_HOSTS = [location.hostname, 'dodio12138.github.io', 'levyflight.uk'];
+
+// itch.io 作品页：<作者>.itch.io/<作品>
+const ITCH_GAME_URL = /^https?:\/\/[a-z0-9-]+\.itch\.io\/[^/?#]+/i;
 
 // 收藏夹：首页、Links 栏、Favorites 菜单共用
 const BROWSER_FAVORITES = [
@@ -344,6 +348,61 @@ function createBrowser() {
         });
     }
 
+    // itch.io 作品不能嵌入，用 data/itch.json 里的信息在浏览器里显示一个作品页；
+    // 不在数据里的 itch.io 页面仍显示"无法显示"页
+    function itchGamePage(url) {
+        const key = url.replace(/^http:/, 'https:').replace(/[?#].*$/, '').replace(/\/+$/, '');
+        showPage([createEl('p', 'browser-muted browser-game-loading', 'Loading...')], new URL(url).hostname, icon16('itch'));
+        loadData('itch')
+            .then(function (data) {
+                if (currentUrl() !== url) return;
+                const game = (data.items || []).find(function (item) {
+                    return item.url.replace(/\/+$/, '') === key;
+                });
+                if (!game) {
+                    blockedPage(url);
+                    return;
+                }
+
+                const box = createEl('div', 'browser-game');
+                if (game.cover) {
+                    const cover = iconImg(game.cover, 'browser-game-cover');
+                    cover.alt = game.title;
+                    box.appendChild(cover);
+                }
+
+                const info = createEl('div', 'browser-game-info');
+                info.appendChild(createEl('h1', '', game.title));
+                if (game.text) info.appendChild(createEl('p', '', game.text));
+
+                const tags = createEl('p', 'browser-game-tags');
+                const tagList = [game.kind === 'tool' ? 'Tool' : 'Game'];
+                if (game.studio) tagList.push(game.studio);
+                if (game.genre) tagList.push(game.genre);
+                if (game.web) tagList.push('Play in browser');
+                (game.platforms || []).forEach(function (p) { tagList.push(p); });
+                tagList.forEach(function (tag) { tags.appendChild(createEl('span', 'card-tag', tag)); });
+                info.appendChild(tags);
+
+                const actions = createEl('div', 'browser-error-actions');
+                [
+                    { label: game.web ? 'Play on itch.io' : 'Open on itch.io', action: function () { openExternal(game.url); } },
+                    { label: 'Back', action: goBack }
+                ].forEach(function (spec) {
+                    const button = createEl('button', '', spec.label);
+                    button.type = 'button';
+                    button.addEventListener('click', spec.action);
+                    actions.appendChild(button);
+                });
+                info.append(actions, createEl('p', 'browser-muted browser-detail',
+                    'itch.io pages cannot be shown inside other sites, so the game opens in a new tab.'));
+
+                box.appendChild(info);
+                showPage([box], game.title, icon16('itch'));
+            })
+            .catch(function () { blockedPage(url); });
+    }
+
     // ---------- 导航 ----------
 
     function render() {
@@ -356,6 +415,9 @@ function createBrowser() {
             finishLoading();
         } else if (url === BROWSER_ABOUT) {
             aboutPage();
+            finishLoading();
+        } else if (ITCH_GAME_URL.test(url)) {
+            itchGamePage(url);
             finishLoading();
         } else if (canEmbed(url)) {
             page.hidden = true;

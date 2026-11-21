@@ -135,7 +135,8 @@ function escapeHtml(value) {
 const URL_APPS = [
     { pattern: /^https?:\/\/dodio12138\.github\.io\/MeTerminal\//i, action: 'meterminal' },
     { pattern: /^https?:\/\/(www\.)?github\.com\/dodio12138(\/|$)/i, action: 'github' },
-    { pattern: /^https?:\/\/dodio12138\.itch\.io(\/|$)/i, action: 'itch' },
+    // 只有 itch.io 个人主页打开 itch.io 窗口；具体作品页在 Levy Browser 里打开（可以直接玩网页游戏）
+    { pattern: /^https?:\/\/dodio12138\.itch\.io\/?([?#].*)?$/i, action: 'itch' },
     { pattern: /^https?:\/\/(space\.bilibili\.com\/12027943|(www\.)?bilibili\.com\/video\/|b23\.tv\/)/i, action: 'bilibili' }
 ];
 

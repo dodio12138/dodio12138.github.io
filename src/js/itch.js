@@ -31,7 +31,9 @@ function createItch(initialUrl) {
     const menubar = createMenuBar([
         { label: '&File', items: function () {
             return [
-                { label: '&Open on itch.io', bold: true, disabled: !selected, action: function () { openExternal(selected.url); } },
+                { label: '&Open', bold: true, disabled: !selected, action: function () { openUrl(selected.url); } },
+                { label: 'Open in &New Tab', disabled: !selected, action: function () { openExternal(selected.url); } },
+                '-',
                 { label: 'Open &Profile on itch.io', action: function () { openExternal(profileUrl); } },
                 { label: 'Open &Lévy Flight Studio on itch.io', action: function () { openExternal(studioUrl); } },
                 '-',
@@ -69,7 +71,8 @@ function createItch(initialUrl) {
 
     function gameMenu(game) {
         return [
-            { label: '&Open on itch.io', bold: true, action: function () { openExternal(game.url); } },
+            { label: '&Open', bold: true, action: function () { openUrl(game.url); } },
+            { label: 'Open in &New Tab', action: function () { openExternal(game.url); } },
             '-',
             { label: '&Copy Link', disabled: !navigator.clipboard, action: function () { navigator.clipboard.writeText(game.url); } }
         ];
@@ -99,7 +102,7 @@ function createItch(initialUrl) {
 
             card.append(thumb, createEl('div', 'card-title', game.title), createEl('div', 'card-text', game.text), meta);
             card.addEventListener('mousedown', function () { select(game, card); });
-            card.addEventListener('dblclick', function () { openExternal(game.url); });
+            card.addEventListener('dblclick', function () { openUrl(game.url); });
             card.addEventListener('contextmenu', function (event) {
                 select(game, card);
                 openPopupMenu(gameMenu(game), event.clientX, event.clientY);

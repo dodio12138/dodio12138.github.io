@@ -459,6 +459,51 @@
     word-break: break-all;
 }
 
+/* ---------- 内置的 itch.io 作品页 ---------- */
+
+.browser-game {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 720px;
+    padding: 24px 28px;
+}
+
+/* 封面是照片/插画，不是像素图标：正常平滑缩放 */
+.browser-game-cover {
+    width: 315px;
+    max-width: 100%;
+    height: auto;
+    flex-shrink: 0;
+    image-rendering: auto;
+    box-shadow: var(--bevel-sunken);
+    padding: 2px;
+    background: var(--ButtonHilight);
+}
+
+.browser-game-info {
+    flex: 1;
+    min-width: 220px;
+}
+
+.browser-game-info h1 {
+    margin-bottom: 8px;
+}
+
+.browser-game-info p {
+    margin-bottom: 10px;
+}
+
+.browser-game-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.browser-game-loading {
+    padding: 24px 28px;
+}
+
 /* ---------- 状态栏 ---------- */
 
 .browser-status {
