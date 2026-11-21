@@ -16,6 +16,7 @@
     }
 
     function setOpen(open) {
+        if (open) loadThumbs();
         menu.classList.toggle('open', open);
         startButton.classList.toggle('pressed', open);
         startButton.setAttribute('aria-expanded', String(open));
@@ -127,6 +128,17 @@
             console.error('Error loading projects:', error);
         });
 
+    // 作品图标用封面缩略图；第一次打开开始菜单时才下载封面（先显示 itch.io 图标）
+    let thumbsWanted = false;
+    function loadThumbs() {
+        thumbsWanted = true;
+        menu.querySelectorAll('.start-menu-item[data-cover]').forEach(function (item) {
+            const icon = item.querySelector('img');
+            if (icon) icon.replaceWith(pixelThumb(item.dataset.cover, 16, icon16('itch')));
+            delete item.dataset.cover;
+        });
+    }
+
     // Games / Tools 子菜单：itch.io 上的作品按 itch.io 的分类分组；
     // 分类未知的（旧数据）先算作游戏。最后一项打开 itch.io 窗口看全部作品。
     const gamesMenu = document.getElementById('start-games');
@@ -142,12 +154,15 @@
                     }
                     entries.forEach(function (game) {
                         const label = game.studio ? game.title + ' (' + game.studio + ')' : game.title;
-                        list.appendChild(submenuItem(label, icon16('itch'), { href: game.url, title: game.text }));
+                        const item = submenuItem(label, icon16('itch'), { href: game.url, title: game.text });
+                        if (game.cover) item.dataset.cover = game.cover;
+                        list.appendChild(item);
                     });
                     list.append(separator(), submenuItem('All on itch.io', icon16('itch'), { action: 'itch' }));
                 };
                 fill(gamesMenu, items.filter(function (game) { return game.kind !== 'tool'; }));
                 fill(toolsMenu, items.filter(function (game) { return game.kind === 'tool'; }));
+                if (thumbsWanted) loadThumbs();
             })
             .catch(function (error) {
                 showMessage(gamesMenu, '(Unavailable)');

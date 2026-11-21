@@ -84,6 +84,44 @@ function pixelAvatar(src, size, inset) {
     return canvas;
 }
 
+// 封面图的像素缩略图（开始菜单里 itch.io 作品的图标）：居中裁成正方形，按显示尺寸 1:1 画在 canvas 上，
+// 外加 1px 灰黑描边，和其他像素图标放在一起不突兀。只用于显示，不读取像素，所以跨域图片也可以。
+// 图片加载失败时画 fallback 图标。
+function pixelThumb(src, size, fallback) {
+    const canvas = createEl('canvas', 'pixel-thumb');
+    canvas.width = size;
+    canvas.height = size;
+    canvas.setAttribute('aria-hidden', 'true');
+    const ctx = canvas.getContext('2d');
+
+    function useFallback() {
+        if (!fallback) return;
+        const icon = new Image();
+        icon.onload = function () { ctx.drawImage(icon, 0, 0, size, size); };
+        icon.src = fallback;
+    }
+
+    if (!src) {
+        useFallback();
+        return canvas;
+    }
+    const img = new Image();
+    img.onload = function () {
+        const side = Math.min(img.naturalWidth, img.naturalHeight);
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(img, (img.naturalWidth - side) / 2, (img.naturalHeight - side) / 2, side, side, 1, 1, size - 2, size - 2);
+        ctx.fillStyle = AVATAR_OUTLINE;
+        ctx.fillRect(0, 0, size, 1);
+        ctx.fillRect(0, size - 1, size, 1);
+        ctx.fillRect(0, 0, 1, size);
+        ctx.fillRect(size - 1, 0, 1, size);
+    };
+    img.onerror = useFallback;
+    img.src = src;
+    return canvas;
+}
+
 function escapeHtml(value) {
     return String(value)
         .replace(/&/g, '&amp;')

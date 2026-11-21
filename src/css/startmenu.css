@@ -73,9 +73,16 @@
     padding-right: 16px;
 }
 
-.start-submenu .start-menu-item img {
+.start-submenu .start-menu-item img,
+.start-submenu .start-menu-item .pixel-thumb {
     width: 16px;
     height: 16px;
+    flex-shrink: 0;
+}
+
+/* 作品封面缩略图是按 16px 画的像素图，高分屏上保持硬边 */
+.start-submenu .pixel-thumb {
+    image-rendering: pixelated;
 }
 
 .start-menu-item .label {
