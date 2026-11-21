@@ -1,6 +1,11 @@
 {
     "projects": [
         {
+            "name": "Lévy Flight Studio",
+            "description": "My independent game studio: systems-driven games designed from rules, feedback and emergence.",
+            "url": "https://levyflight.uk/"
+        },
+        {
             "name": "BadgeGenerator",
             "description": "Easy and fast badge generation based on shields.io, with support for custom icons.",
             "url": "https://dodio12138.github.io/badge-generator/src/index.html"

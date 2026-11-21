@@ -18,6 +18,7 @@ function createItch(initialUrl) {
 
     let games = [];
     let profileUrl = 'https://dodio12138.itch.io/';
+    let studioUrl = 'https://levyflightstudio.itch.io/';
     let selected = null;
 
     const pane = createEl('div', 'app-pane');
@@ -32,6 +33,7 @@ function createItch(initialUrl) {
             return [
                 { label: '&Open on itch.io', bold: true, disabled: !selected, action: function () { openExternal(selected.url); } },
                 { label: 'Open &Profile on itch.io', action: function () { openExternal(profileUrl); } },
+                { label: 'Open &Lévy Flight Studio on itch.io', action: function () { openExternal(studioUrl); } },
                 '-',
                 { label: '&Close', action: function () { closeWindow(win); } }
             ];
@@ -39,7 +41,8 @@ function createItch(initialUrl) {
         { label: '&Help', items: function () {
             return [{ label: '&About itch.io', action: function () {
                 aboutDialog('itchabout', 'itch.io', icon32('itch'), [
-                    'Games by Levy on dodio12138.itch.io.',
+                    'Games by Levy on dodio12138.itch.io,',
+                    'and by Lévy Flight Studio on levyflightstudio.itch.io.',
                     'The list updates itself every day.'
                 ]);
             } }];
@@ -50,6 +53,7 @@ function createItch(initialUrl) {
 
     function describe(game) {
         const parts = [game.title];
+        if (game.studio) parts.push(game.studio);
         if (game.genre) parts.push(game.genre);
         if (game.web) parts.push('Play in browser');
         if (game.platforms.length) parts.push(game.platforms.join(' / '));
@@ -89,6 +93,7 @@ function createItch(initialUrl) {
             if (game.web) thumb.appendChild(createEl('span', 'card-badge', '▶ Play in browser'));
 
             const meta = createEl('div', 'card-meta');
+            if (game.studio) meta.appendChild(createEl('span', 'card-tag', game.studio));
             if (game.genre) meta.appendChild(createEl('span', 'card-tag', game.genre));
             game.platforms.forEach(function (p) { meta.appendChild(createEl('span', 'card-tag', p)); });
 
@@ -125,6 +130,7 @@ function createItch(initialUrl) {
         .then(function (data) {
             games = data.items;
             if (data.profile && data.profile.url) profileUrl = data.profile.url;
+            if (data.studio && data.studio.url) studioUrl = data.studio.url;
             statusUpdated.textContent = 'Updated ' + formatDate(data.updated);
             select(null);
             render();

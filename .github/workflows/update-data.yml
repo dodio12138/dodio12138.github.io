@@ -3,6 +3,7 @@
 #
 # 可选的 Secrets（Settings → Secrets and variables → Actions），设置方法见 scripts/INSTAGRAM_SETUP.md：
 #   ITCH_API_KEY     itch.io API 密钥（见 scripts/ITCH_SETUP.md）；itch.io 会拦截 GitHub 服务器的网页请求，没有它游戏列表不会更新
+#   ITCH_STUDIO_API_KEY  工作室账号 levyflightstudio 的 itch.io API 密钥（同样步骤，在工作室账号里生成）；不设置时保留上一次的工作室游戏
 #   INSTAGRAM_TOKEN  Instagram 长期访问令牌；不设置则跳过 Instagram
 #   GH_PAT           有本仓库 "Secrets: Read and write" 权限的细粒度令牌，用来把续期后的 Instagram 令牌写回 Secrets
 
@@ -36,6 +37,7 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   ITCH_API_KEY: ${{ secrets.ITCH_API_KEY }}
+                  ITCH_STUDIO_API_KEY: ${{ secrets.ITCH_STUDIO_API_KEY }}
                   INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
                   INSTAGRAM_TOKEN_FILE: ${{ runner.temp }}/instagram-token
 

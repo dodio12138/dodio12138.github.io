@@ -7,7 +7,8 @@
 // - 只有内容变化时才重写 data/*.json（不会因为时间戳产生无意义的提交）
 // - 某个来源失败时保留它上一次的数据，其余来源照常更新
 // - sitemap.xml 只增不减
-// - itch.io 在 GitHub 服务器上需要环境变量 ITCH_API_KEY（见 scripts/ITCH_SETUP.md），本地可不设置
+// - itch.io 在 GitHub 服务器上需要环境变量 ITCH_API_KEY（见 scripts/ITCH_SETUP.md），本地可不设置；
+//   工作室账号 levyflightstudio 用 ITCH_STUDIO_API_KEY（同样的步骤，在工作室账号里生成）
 // - Instagram 需要环境变量 INSTAGRAM_TOKEN（存放在 GitHub Secrets，设置方法见 scripts/INSTAGRAM_SETUP.md）；
 //   没有配置时跳过，窗口继续显示 instagram.js 里的内置照片
 
@@ -18,6 +19,7 @@ import { fileURLToPath } from 'node:url';
 const ACCOUNTS = {
     github: 'dodio12138',
     itch: 'dodio12138',
+    itchStudio: 'levyflightstudio',   // Lévy Flight Studio；它的游戏合并进同一个 itch.io 窗口，带 studio 标记
     bilibili: 12027943
 };
 const SITE = 'https://dodio12138.github.io';
@@ -144,7 +146,7 @@ function itchPlatforms(game) {
     return Object.keys(ITCH_PLATFORMS).filter((k) => keys.indexOf(k) !== -1).map((k) => ITCH_PLATFORMS[k]);
 }
 
-async function fetchItchApi(key) {
+async function fetchItchApi(key, account = ACCOUNTS.itch) {
     const res = await fetch('https://api.itch.io/profile/games', {
         headers: { 'User-Agent': UA, Authorization: `Bearer ${key}` }
     });
@@ -154,7 +156,8 @@ async function fetchItchApi(key) {
         throw new Error(`api.itch.io/profile/games → ${message.split(key).join('***')}`);
     }
     // API 没有“类型”字段：沿用上一次数据里同一游戏的类型
-    const previous = readJson(path.join(DATA_DIR, 'itch.json'), { items: [] }).items || [];
+    const previous = (readJson(path.join(DATA_DIR, 'itch.json'), { items: [] }).items || [])
+        .filter((g) => (account === ACCOUNTS.itchStudio) === Boolean(g.studio));
     const genreById = new Map(previous.map((g) => [String(g.id), g.genre]));
     const games = (json.games || [])
         .filter((g) => g.published)
@@ -172,12 +175,29 @@ async function fetchItchApi(key) {
     // API 只返回自己上传或可编辑的游戏；之前从主页收录的合作游戏（API 里完全没有的）继续保留
     const known = new Set((json.games || []).map((g) => String(g.id)));
     const extra = previous.filter((g) => !known.has(String(g.id)));
-    return { profile: { url: `https://${ACCOUNTS.itch}.itch.io/` }, items: games.concat(extra) };
+    return { profile: { url: `https://${account}.itch.io/` }, items: games.concat(extra) };
 }
 
 async function fetchItch() {
-    if (process.env.ITCH_API_KEY) return fetchItchApi(process.env.ITCH_API_KEY);
-    return fetchItchPage();
+    const own = process.env.ITCH_API_KEY ? await fetchItchApi(process.env.ITCH_API_KEY) : await fetchItchPage();
+    // 个人账号的结果里去掉上一次合并进来的工作室游戏，再单独抓工作室账号
+    own.items = own.items.filter((g) => !g.studio);
+    try {
+        const studio = process.env.ITCH_STUDIO_API_KEY
+            ? await fetchItchApi(process.env.ITCH_STUDIO_API_KEY, ACCOUNTS.itchStudio)
+            : await fetchItchPage(ACCOUNTS.itchStudio);
+        const seen = new Set(own.items.map((g) => String(g.id)));
+        own.items = studio.items.filter((g) => !seen.has(String(g.id)))
+            .map((g) => ({ ...g, studio: 'Lévy Flight Studio' })).concat(own.items);
+        own.studio = { url: `https://${ACCOUNTS.itchStudio}.itch.io/` };
+    } catch (error) {
+        // 工作室部分失败时保留上一次的工作室游戏，不影响个人部分
+        console.warn(`[itch] studio skipped: ${error.message}`);
+        const previous = readJson(path.join(DATA_DIR, 'itch.json'), { items: [] });
+        own.items = (previous.items || []).filter((g) => g.studio).concat(own.items);
+        if (previous.studio) own.studio = previous.studio;
+    }
+    return own;
 }
 
 // 解析个人主页的游戏格子（本地运行时可用）
@@ -188,8 +208,8 @@ function decodeEntities(text) {
         .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&#x27;/g, "'");
 }
 
-async function fetchItchPage() {
-    const url = `https://${ACCOUNTS.itch}.itch.io/`;
+async function fetchItchPage(account = ACCOUNTS.itch) {
+    const url = `https://${account}.itch.io/`;
     const res = await fetch(url, { headers: { 'User-Agent': UA } });
     if (!res.ok) throw new Error(`${url} → HTTP ${res.status}`);
     const html = await res.text();
