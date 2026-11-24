@@ -30,6 +30,7 @@ const ITCH_GAME_URL = /^https?:\/\/[a-z0-9-]+\.itch\.io\/[^/?#]+/i;
 // 收藏夹：首页、Links 栏、Favorites 菜单共用
 const BROWSER_FAVORITES = [
     { title: 'Lévy Flight Studio', url: 'https://levyflight.uk/', icon: icon16('levyflight'), desc: 'My game studio.' },
+    { title: 'Naiwa Gothic Tarot', url: 'https://dodio12138.github.io/naiwa-gothic-tarot/', icon: icon16('naiwa-tarot'), desc: 'A gothic tarot card draw.' },
     { title: 'FunPages', url: 'https://dodio12138.github.io/fun-pages/', icon: icon16('web-files'), desc: 'Some interesting HTML stuffs.' },
     { title: "Dodio's Blog", url: 'https://dodio12138.github.io/blog/', icon: icon16('blog'), desc: 'Notes and articles.' },
     { title: 'MeTerminal', url: 'https://dodio12138.github.io/MeTerminal/src/MePC.html', icon: icon16('console'), desc: 'A web page that simulates terminal.' },
