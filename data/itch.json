@@ -1,9 +1,24 @@
 {
-    "updated": "2026-11-21T02:24:16.000Z",
+    "updated": "2026-11-25T03:26:40.570Z",
     "profile": {
         "url": "https://dodio12138.itch.io/"
     },
     "items": [
+        {
+            "id": "5437155",
+            "title": "SHIFT PONG",
+            "url": "https://dodio12138.itch.io/shift-pong",
+            "text": "Pixel table tennis where the rules keep shifting. Hold SHIFT, bend the rules.",
+            "cover": "https://img.itch.zone/aW1nLzMyNzY2OTM3LnBuZw==/315x250%23c/BXa5Td.png",
+            "genre": "",
+            "kind": "game",
+            "web": true,
+            "platforms": [
+                "Windows",
+                "Linux",
+                "macOS"
+            ]
+        },
         {
             "id": "5411217",
             "title": "Cloud Generator",

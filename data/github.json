@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-21T02:24:15.067Z",
+    "updated": "2026-11-25T03:26:40.128Z",
     "profile": {
         "login": "dodio12138",
         "name": "Levy",
@@ -8,9 +8,21 @@
         "url": "https://github.com/dodio12138",
         "followers": 7,
         "following": 36,
-        "publicRepos": 51
+        "publicRepos": 53
     },
     "items": [
+        {
+            "name": "naiwa-gothic-tarot",
+            "description": "奶蛙的暗黑命运 · 哥特塔罗抽卡网站（Naiwa Gothic Tarot）",
+            "language": "JavaScript",
+            "stars": 0,
+            "forks": 0,
+            "topics": [],
+            "url": "https://github.com/dodio12138/naiwa-gothic-tarot",
+            "homepage": "https://dodio12138.github.io/naiwa-gothic-tarot/",
+            "pushed": "2026-11-25T01:12:38Z",
+            "created": "2026-11-24T19:31:14Z"
+        },
         {
             "name": "dodio12138.github.io",
             "description": "Windows98-style personal website",
@@ -20,20 +32,32 @@
             "topics": [],
             "url": "https://github.com/dodio12138/dodio12138.github.io",
             "homepage": "https://dodio12138.github.io/",
-            "pushed": "2026-11-21T02:24:04Z",
+            "pushed": "2026-11-24T21:33:20Z",
             "created": "2023-04-03T18:37:34Z"
         },
         {
-            "name": "blog",
-            "description": "",
-            "language": "HTML",
+            "name": "Block-the-Bot",
+            "description": "Asymmetric Tetris duel: a human picks the pieces, a 0.6B LLM (Qwen3-0.6B + LoRA) defends. C++ rules core, Python agent, Godot 4 client.",
+            "language": "Python",
             "stars": 0,
             "forks": 0,
             "topics": [],
-            "url": "https://github.com/dodio12138/blog",
-            "homepage": "https://dodio12138.github.io/blog/",
-            "pushed": "2026-11-21T02:23:54Z",
-            "created": "2023-12-19T21:29:37Z"
+            "url": "https://github.com/dodio12138/Block-the-Bot",
+            "homepage": "",
+            "pushed": "2026-11-24T18:01:00Z",
+            "created": "2026-11-24T16:43:46Z"
+        },
+        {
+            "name": "shift-pong",
+            "description": "SHIFT PONG — pixel-art 3D table tennis with SHIFT skills. GitHub Game Off 2026 entry (Godot 4.7).",
+            "language": "GDScript",
+            "stars": 0,
+            "forks": 0,
+            "topics": [],
+            "url": "https://github.com/dodio12138/shift-pong",
+            "homepage": "",
+            "pushed": "2026-11-24T17:01:07Z",
+            "created": "2026-11-04T04:53:54Z"
         },
         {
             "name": "agent-ensemble",
@@ -44,8 +68,20 @@
             "topics": [],
             "url": "https://github.com/dodio12138/agent-ensemble",
             "homepage": "",
-            "pushed": "2026-11-21T02:21:05Z",
+            "pushed": "2026-11-21T05:18:11Z",
             "created": "2026-11-21T00:51:31Z"
+        },
+        {
+            "name": "blog",
+            "description": "",
+            "language": "HTML",
+            "stars": 0,
+            "forks": 0,
+            "topics": [],
+            "url": "https://github.com/dodio12138/blog",
+            "homepage": "https://dodio12138.github.io/blog/",
+            "pushed": "2026-11-21T02:24:22Z",
+            "created": "2023-12-19T21:29:37Z"
         },
         {
             "name": "military-unit-system",
@@ -107,18 +143,6 @@
             "homepage": "",
             "pushed": "2026-11-07T10:24:27Z",
             "created": "2023-08-15T12:31:15Z"
-        },
-        {
-            "name": "shift-pong",
-            "description": "SHIFT PONG — pixel-art 3D table tennis with SHIFT skills. GitHub Game Off 2026 entry (Godot 4.7).",
-            "language": "GDScript",
-            "stars": 0,
-            "forks": 0,
-            "topics": [],
-            "url": "https://github.com/dodio12138/shift-pong",
-            "homepage": "",
-            "pushed": "2026-11-06T01:06:27Z",
-            "created": "2026-11-04T04:53:54Z"
         },
         {
             "name": "campaignandbattle",
